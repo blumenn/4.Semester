@@ -132,9 +132,9 @@ void lora_handler_task( void *pvParameters )
 
 		if(xTestSemaphore!=null)
 		// Some dummy payload
-		if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(2000))==pdTRUE){
+		if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE){
 		uint16_t hum = hih8120_getHumidity(); // Dummy humidity
-		int16_t temp = 675; // Dummy temp
+		int16_t temp = hih8120_getTemperature(); // Dummy temp
 		uint16_t co2_ppm = 1050; // Dummy CO2
 
 		_uplink_payload.bytes[0] = hum >> 8;
