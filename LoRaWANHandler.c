@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 #include <ATMEGA_FreeRTOS.h>
-
+#include <semphr.h>
 #include <lora_driver.h>
 #include <status_leds.h>
 extern SemaphoreHandle_t xTestSemaphore;
@@ -129,12 +129,10 @@ void lora_handler_task( void *pvParameters )
 	{
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 
-
-		if(xTestSemaphore!=NULL)
-		// Some dummy payload
 		if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE){
-		uint16_t hum = hih8120_getHumidity(); // Dummy humidity
-		int16_t temp = hih8120_getTemperature(); // Dummy temp
+		// Some dummy payload
+		uint16_t hum = (uint16_t) hih8120_getHumidity(); // Dummy humidity
+		int16_t temp = (uint16_t) hih8120_getTemperature(); // Dummy temp
 		uint16_t co2_ppm = 1050; // Dummy CO2
 
 		_uplink_payload.bytes[0] = hum >> 8;
@@ -146,6 +144,7 @@ void lora_handler_task( void *pvParameters )
 
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
+		xSemaphoreGive(xTestSemaphore);
 		}
 	}
 }
