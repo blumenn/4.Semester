@@ -132,6 +132,7 @@ void lora_handler_task( void *pvParameters )
 
 		if(xTestSemaphore!=null)
 		// Some dummy payload
+		if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(2000))==pdTRUE){
 		uint16_t hum = hih8120_getHumidity(); // Dummy humidity
 		int16_t temp = 675; // Dummy temp
 		uint16_t co2_ppm = 1050; // Dummy CO2
@@ -145,5 +146,6 @@ void lora_handler_task( void *pvParameters )
 
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
+		}
 	}
 }
