@@ -118,9 +118,10 @@ temperature = hih8120_getTemperature();
 	// Power up the display
 	display_7seg_powerUp();
 	display_7seg_display(humidity, 1);
+	xSemaphoreGive(xTestSemaphore);
 	}
 	_delay_ms(10);
-xSemaphoreGive(xTestSemaphore);
+
 }
 }
 
