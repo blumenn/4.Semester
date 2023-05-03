@@ -97,7 +97,7 @@ void task2( void *pvParameters )
 		PORTA ^= _BV(PA7);
 		
 		 
-
+if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
 if ( HIH8120_OK != hih8120_wakeup() )
 {
        // Something went wrong
@@ -119,8 +119,9 @@ temperature = hih8120_getTemperature();
 	display_7seg_powerUp();
 	display_7seg_display(humidity, 1);
 	}
-
-
+	_delay_ms(10);
+xSemaphoreGive(xTestSemaphore)
+}
 }
 
 /*-----------------------------------------------------------*/
