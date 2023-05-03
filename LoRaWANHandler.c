@@ -12,6 +12,8 @@
 #include <lora_driver.h>
 #include <status_leds.h>
 
+#extern SemaphoreHandle_t xTestSemaphore;
+
 // Parameters for OTAA join - You have got these in a mail from IHA
 #define LORA_appEUI "7D8AC642ABB372BC"
 #define LORA_appKEY "458FC671144070F154BC8984B6051DA7"
@@ -129,6 +131,8 @@ void lora_handler_task( void *pvParameters )
 	{
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 
+
+		if(xTestSemaphore!=null)
 		// Some dummy payload
 		uint16_t hum = 12345; // Dummy humidity
 		int16_t temp = 675; // Dummy temp
