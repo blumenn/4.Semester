@@ -4,3 +4,4 @@
 [submodule "FreeRTOS"]
 	path = FreeRTOS
 	url = https://github.com/ihavn/VIA_FreeRTOS_AVRMEGA
+e
