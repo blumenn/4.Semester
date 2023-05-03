@@ -120,7 +120,7 @@ temperature = hih8120_getTemperature();
 	display_7seg_display(humidity, 1);
 	}
 	_delay_ms(10);
-xSemaphoreGive(xTestSemaphore)
+xSemaphoreGive(xTestSemaphore);
 }
 }
 
