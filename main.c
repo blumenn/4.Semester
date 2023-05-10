@@ -10,10 +10,12 @@
 #include <avr/io.h>
 #include <hih8120.h>
 #include <util/delay.h>
+#include <mh_z19.h>
 
 #include <ATMEGA_FreeRTOS.h>
 #include <task.h>
 #include <semphr.h>
+
 
 #include <stdio_driver.h>
 #include <serial.h>
@@ -65,6 +67,30 @@ void create_tasks_and_semaphores(void)
 }
 
 /*-----------------------------------------------------------*/
+
+	uint16_t ppm;
+	
+	void Co2CallBack(uint16_t ppmCallback)
+	{
+		ppm = ppmCallback;
+	}
+
+	void co2_taskRun()
+	{
+
+		mh_z19_returnCode_t rc;
+
+		
+		rc = mh_z19_takeMeassuring();
+		if (rc != MHZ19_OK)
+		{
+			// Something went wrong
+		}
+	}
+
+	uint16_t co2_getPpm(){
+		return ppm;
+	}
 void task1( void *pvParameters )
 {
 	TickType_t xLastWakeTime;
@@ -78,7 +104,11 @@ void task1( void *pvParameters )
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 		puts("Task1"); // stdio functions are not reentrant - Should normally be protected by MUTEX
 		PORTA ^= _BV(PA0);
+
+		co2_taskRun();
 	}
+
+
 }
 
 /*-----------------------------------------------------------*/
@@ -97,7 +127,7 @@ void task2( void *pvParameters )
 		PORTA ^= _BV(PA7);
 		
 		 
-
+if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
 if ( HIH8120_OK != hih8120_wakeup() )
 {
        // Something went wrong
@@ -118,9 +148,11 @@ temperature = hih8120_getTemperature();
 	// Power up the display
 	display_7seg_powerUp();
 	display_7seg_display(humidity, 1);
+	xSemaphoreGive(xTestSemaphore);
 	}
+	_delay_ms(10);
 
-
+}
 }
 
 /*-----------------------------------------------------------*/
@@ -151,6 +183,8 @@ void initialiseSystem()
 
 _delay_ms(1000);
 
+mh_z19_initialise(ser_USART3); 
+mh_z19_injectCallBack(Co2CallBack);
 
 }
 
