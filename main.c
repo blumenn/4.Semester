@@ -20,6 +20,7 @@
 
 #include <stdio_driver.h>
 #include <serial.h>
+#include "./"
 
  // Needed for LoRaWAN
 #include <lora_driver.h>
@@ -173,11 +174,7 @@ void initialiseSystem()
 	lora_handler_initialise(3);
 	
 	display_7seg_initialise(NULL); 
- if ( HIH8120_OK == hih8120_initialise() )
-{
-       // Driver initialised OK
-       // Always check what hih8120_initialise() returns
-}
+
 _delay_ms(1000);
 co2_init();
 }
