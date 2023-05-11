@@ -16,6 +16,9 @@ extern SemaphoreHandle_t xTestSemaphore;
 #define LORA_appEUI "7D8AC642ABB372BC"
 #define LORA_appKEY "458FC671144070F154BC8984B6051DA7"
 
+uint16_t maxHumSetting; // Max Humidity
+int16_t maxTempSetting; // Max Temperature
+
 void lora_handler_task( void *pvParameters );
 
 static lora_driver_payload_t _uplink_payload;
@@ -128,8 +131,10 @@ void lora_handler_task( void *pvParameters )
 	for(;;)
 	{
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
+		
 
-		if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE){
+		if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE)
+		{
 		// Some dummy payload
 		uint16_t hum = (uint16_t) hih8120_getHumidity(); // Dummy humidity
 		int16_t temp = (uint16_t) hih8120_getTemperature(); // Dummy temp
@@ -146,5 +151,7 @@ void lora_handler_task( void *pvParameters )
 		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
 		xSemaphoreGive(xTestSemaphore);
 		}
+	
+		
 	}
 }

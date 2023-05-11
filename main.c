@@ -156,6 +156,7 @@ temperature = hih8120_getTemperature();
 }
 
 /*-----------------------------------------------------------*/
+
 void initialiseSystem()
 {
 	// Set output ports for leds used in the example
