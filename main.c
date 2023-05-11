@@ -11,6 +11,7 @@
 #include <hih8120.h>
 #include <util/delay.h>
 #include <mh_z19.h>
+#include "src/handlers/co2Handler/interface/co2Handler.h"
 
 #include <ATMEGA_FreeRTOS.h>
 #include <task.h>
@@ -147,7 +148,7 @@ temperature = hih8120_getTemperature();
 
 	// Power up the display
 	display_7seg_powerUp();
-	display_7seg_display(humidity, 1);
+	display_7seg_display((float) co2_getMeasurement(), 1);
 	xSemaphoreGive(xTestSemaphore);
 	}
 	_delay_ms(10);
@@ -183,8 +184,7 @@ void initialiseSystem()
 
 _delay_ms(1000);
 
-mh_z19_initialise(ser_USART3); 
-mh_z19_injectCallBack(Co2CallBack);
+co2_init();
 
 }
 
