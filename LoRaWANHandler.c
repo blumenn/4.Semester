@@ -16,12 +16,15 @@ extern SemaphoreHandle_t xTestSemaphore;
 #define LORA_appEUI "7D8AC642ABB372BC"
 #define LORA_appKEY "458FC671144070F154BC8984B6051DA7"
 
-uint16_t maxHumSetting; // Max Humidity
-int16_t maxTempSetting; // Max Temperature
-
 void lora_handler_task( void *pvParameters );
 
 static lora_driver_payload_t _uplink_payload;
+
+lora_driver_payload_t downlinkPayload;
+
+
+uint16_t maxHumSetting; // Max Humidity
+int16_t maxTempSetting; // Max Temperature
 
 void lora_handler_initialise(UBaseType_t lora_handler_task_priority)
 {
@@ -33,6 +36,7 @@ void lora_handler_initialise(UBaseType_t lora_handler_task_priority)
 	,  lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	,  NULL );
 }
+
 
 static void _lora_setup(void)
 {
@@ -123,6 +127,7 @@ void lora_handler_task( void *pvParameters )
 
 	_uplink_payload.len = 6;
 	_uplink_payload.portNo = 2;
+	
 
 	TickType_t xLastWakeTime;
 	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
@@ -130,6 +135,7 @@ void lora_handler_task( void *pvParameters )
 	
 	for(;;)
 	{
+			
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 		
 
@@ -150,6 +156,18 @@ void lora_handler_task( void *pvParameters )
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
 		xSemaphoreGive(xTestSemaphore);
+		}
+		MessageBufferHandle_t downLinkMessageBufferHandle = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2); // Here I make room for two downlink messages in the message buffer
+		lora_driver_initialise(ser_USART1, downLinkMessageBufferHandle); // The parameter is the USART port the RN2483 module is connected to - in this case USART1 - here no message buffer for down-link messages are defined
+		
+		// this code must be in the loop of a FreeRTOS task!
+		xMessageBufferReceive(downLinkMessageBufferHandle, &downlinkPayload, sizeof(lora_driver_payload_t), portMAX_DELAY);
+		printf("DOWN LINK: from port: %d with %d bytes received!", downlinkPayload.portNo, downlinkPayload.len); // Just for Debug
+		if (4 == downlinkPayload.len) // Check that we have got the expected 4 bytes
+		{
+       // decode the payload into our variales
+       maxHumSetting = (downlinkPayload.bytes[0] << 8) + downlinkPayload.bytes[1];
+       maxTempSetting = (downlinkPayload.bytes[2] << 8) + downlinkPayload.bytes[3];
 		}
 	
 		
