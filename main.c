@@ -11,11 +11,11 @@
 #include <hih8120.h>
 #include <util/delay.h>
 #include <mh_z19.h>
-#include "src/handlers/co2Handler/interface/co2Handler.h"
 
 #include <ATMEGA_FreeRTOS.h>
 #include <task.h>
 #include <semphr.h>
+#include "./src/handlers/co2Handler/interface/co2Handler.h"
 
 
 #include <stdio_driver.h>
@@ -148,7 +148,7 @@ temperature = hih8120_getTemperature();
 
 	// Power up the display
 	display_7seg_powerUp();
-	display_7seg_display((float) co2_getMeasurement(), 1);
+	display_7seg_display(humidity, 1);
 	xSemaphoreGive(xTestSemaphore);
 	}
 	_delay_ms(10);
@@ -159,33 +159,27 @@ temperature = hih8120_getTemperature();
 /*-----------------------------------------------------------*/
 void initialiseSystem()
 {
-	// Set output ports for leds used in the example
+	
 	DDRA |= _BV(DDA0) | _BV(DDA7);
 
-	// Make it possible to use stdio on COM port 0 (USB) on Arduino board - Setting 57600,8,N,1
+	
 	stdio_initialise(ser_USART0);
-	// Let's create some tasks
+	
 	create_tasks_and_semaphores();
 
-	// vvvvvvvvvvvvvvvvv BELOW IS LoRaWAN initialisation vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-	// Status Leds driver
-	status_leds_initialise(5); // Priority 5 for internal task
-	// Initialise the LoRaWAN driver without down-link buffer
+	status_leds_initialise(5); 
 	lora_driver_initialise(1, NULL);
-	// Create LoRaWAN task and start it up with priority 3
+	
 	lora_handler_initialise(3);
-	// Here the call back function is not needed
+	
 	display_7seg_initialise(NULL); 
  if ( HIH8120_OK == hih8120_initialise() )
 {
        // Driver initialised OK
        // Always check what hih8120_initialise() returns
 }
-
 _delay_ms(1000);
-
 co2_init();
-
 }
 
 /*-----------------------------------------------------------*/

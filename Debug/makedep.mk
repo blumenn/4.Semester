@@ -24,6 +24,10 @@ FreeRTOS\src\timers.c
 
 FreeRTOS\src\variantHooks.c
 
+src\handlers\co2Handler\co2Handler.c
+
+src\implementation\co2Impl\co2impl.c
+
 LoRaWANHandler.c
 
 main.c
