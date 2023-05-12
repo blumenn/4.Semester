@@ -6,6 +6,8 @@
 */
 #include <stddef.h>
 #include <stdio.h>
+#include "src/handlers/co2Handler/interface/co2Handler.h"
+
 
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
@@ -133,7 +135,7 @@ void lora_handler_task( void *pvParameters )
 		// Some dummy payload
 		uint16_t hum = (uint16_t) hih8120_getHumidity(); // Dummy humidity
 		int16_t temp = (uint16_t) hih8120_getTemperature(); // Dummy temp
-		uint16_t co2_ppm = 1050; // Dummy CO2
+		uint16_t co2_ppm = co2_getMeasurement(); // Dummy CO2
 
 		_uplink_payload.bytes[0] = hum >> 8;
 		_uplink_payload.bytes[1] = hum & 0xFF;
