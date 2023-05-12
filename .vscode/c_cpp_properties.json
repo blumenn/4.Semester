@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/src/handlers/co2Handler/interface",
-                "${workspaceFolder}/src/implementation"
+                "${workspaceFolder}/src/implementation",
+                "${workspaceFolder}/src/handlers/temperturHandler/interface"
             ],
             "defines": [
                 "_DEBUG",

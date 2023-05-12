@@ -1,5 +1,5 @@
 #include <stdint.h>
 
-void tempimpl_init();
-void tempimpl_measure();
-uint16_t tempimpl_getMeasurement();
+
+void humimpl_measure();
+uint16_t humimpl_getMeasurement();

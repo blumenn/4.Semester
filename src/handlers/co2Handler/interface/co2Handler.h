@@ -1,3 +1,4 @@
+#include <stdint.h>
 
 void co2_init();
 

@@ -1,18 +1,15 @@
 #include <stdint.h>
 #include <hih8120.h>
+#include <ATMEGA_FreeRTOS.h>
+#include <semphr.h>
+#include "humidityImpl.h"
+
 
 uint16_t temp;
 extern SemaphoreHandle_t xTestSemaphore;
 
 
-void tempimpl_init(){
-     if ( HIH8120_OK == hih8120_initialise() )
-{
-       // Driver initialised OK
-       // Always check what hih8120_initialise() returns
-}
-}
-void tempimpl_measure(){
+void humimpl_measure(){
     if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
     if ( HIH8120_OK != hih8120_wakeup() )
 {
@@ -25,11 +22,11 @@ if ( HIH8120_OK !=  hih8120_measure() )
        // Something went wrong
        // Investigate the return code further
 }
-temp = hih8120_getTemperature();
+temp = hih8120_getHumidity();
 xSemaphoreGive(xTestSemaphore);
     }
 }
-uint16_t tempimpl_getMeasurement(){
+uint16_t humimpl_getMeasurement(){
     
 return temp;
 }

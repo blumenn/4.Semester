@@ -16,11 +16,13 @@
 #include <task.h>
 #include <semphr.h>
 #include "./src/handlers/co2Handler/interface/co2Handler.h"
+#include "src/handlers/temperturHandler/interface/temperturHandler.h"
+
 
 
 #include <stdio_driver.h>
 #include <serial.h>
-#include "./"
+
 
  // Needed for LoRaWAN
 #include <lora_driver.h>
@@ -177,6 +179,8 @@ void initialiseSystem()
 
 _delay_ms(1000);
 co2_init();
+temp_init();
+
 }
 
 /*-----------------------------------------------------------*/

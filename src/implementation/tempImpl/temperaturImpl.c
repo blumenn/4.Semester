@@ -1,5 +1,11 @@
+#include <ATMEGA_FreeRTOS.h>
 #include <stdint.h>
 #include <hih8120.h>
+#include <semphr.h>
+
+#include "temperaturimpl.h"
+
+
 
 uint16_t temp;
 extern SemaphoreHandle_t xTestSemaphore;
@@ -33,3 +39,4 @@ uint16_t tempimpl_getMeasurement(){
     
 return temp;
 }
+

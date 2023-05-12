@@ -291,13 +291,49 @@
     <Compile Include="src\handlers\co2Handler\co2Handler.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\handlers\co2Handler\co2Handler.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\handlers\co2Handler\interface\co2Handler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\handlers\humidityHandler\humidityHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\handlers\humidityHandler\humidityHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\handlers\humidityHandler\interface\humidityHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\handlers\temperturHandler\interface\temperturHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\handlers\temperturHandler\temperturHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\handlers\temperturHandler\temperturHandler.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\implementation\co2Impl\co2.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\implementation\co2Impl\co2impl.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\implementation\humidityImpl\humidityImpl.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\implementation\humidityImpl\humidityImpl.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\implementation\tempImpl\temperaturImpl.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\implementation\tempImpl\temperatur.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\implementation\tempImpl\temperaturimpl.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
@@ -314,6 +350,10 @@
     <Folder Include="src\handlers\co2Handler\interface\" />
     <Folder Include="src\handlers\humidityHandler\" />
     <Folder Include="src\handlers\humidityHandler\interface\" />
+    <Folder Include="src\handlers\temperturHandler\" />
+    <Folder Include="src\handlers\temperturHandler\" />
+    <Folder Include="src\handlers\temperturHandler\interface\" />
+    <Folder Include="src\handlers\temperturHandler\interface\" />
     <Folder Include="src\handlers\tempHandler\" />
     <Folder Include="src\handlers\tempHandler\interface\" />
     <Folder Include="src\implementation\" />

@@ -1,5 +1,4 @@
-#include "co2Handler.h"
-#include "co2Impl/co2.h"
+#include <stdint.h>
 
 void co2_init(){
     co2impl_init();

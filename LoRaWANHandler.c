@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include "src/handlers/co2Handler/interface/co2Handler.h"
 
+
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
 #include <lora_driver.h>

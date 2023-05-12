@@ -45,6 +45,10 @@ SUBDIRS :=  \
 ../src/handlers/co2Handler/interface/ \
 ../src/handlers/humidityHandler/ \
 ../src/handlers/humidityHandler/interface/ \
+../src/handlers/temperturHandler/ \
+../src/handlers/temperturHandler/ \
+../src/handlers/temperturHandler/interface/ \
+../src/handlers/temperturHandler/interface/ \
 ../src/handlers/tempHandler/ \
 ../src/handlers/tempHandler/interface/ \
 ../src/implementation/ \
@@ -67,7 +71,11 @@ C_SRCS +=  \
 ../FreeRTOS/src/timers.c \
 ../FreeRTOS/src/variantHooks.c \
 ../src/handlers/co2Handler/co2Handler.c \
+../src/handlers/humidityHandler/humidityHandler.c \
+../src/handlers/temperturHandler/temperturHandler.c \
 ../src/implementation/co2Impl/co2impl.c \
+../src/implementation/humidityImpl/humidityImpl.c \
+../src/implementation/tempImpl/temperaturImpl.c \
 ../LoRaWANHandler.c \
 ../main.c
 
@@ -91,7 +99,11 @@ FreeRTOS/src/tasks.o \
 FreeRTOS/src/timers.o \
 FreeRTOS/src/variantHooks.o \
 src/handlers/co2Handler/co2Handler.o \
+src/handlers/humidityHandler/humidityHandler.o \
+src/handlers/temperturHandler/temperturHandler.o \
 src/implementation/co2Impl/co2impl.o \
+src/implementation/humidityImpl/humidityImpl.o \
+src/implementation/tempImpl/temperaturImpl.o \
 LoRaWANHandler.o \
 main.o
 
@@ -108,7 +120,11 @@ FreeRTOS/src/tasks.o \
 FreeRTOS/src/timers.o \
 FreeRTOS/src/variantHooks.o \
 src/handlers/co2Handler/co2Handler.o \
+src/handlers/humidityHandler/humidityHandler.o \
+src/handlers/temperturHandler/temperturHandler.o \
 src/implementation/co2Impl/co2impl.o \
+src/implementation/humidityImpl/humidityImpl.o \
+src/implementation/tempImpl/temperaturImpl.o \
 LoRaWANHandler.o \
 main.o
 
@@ -125,7 +141,11 @@ FreeRTOS/src/tasks.d \
 FreeRTOS/src/timers.d \
 FreeRTOS/src/variantHooks.d \
 src/handlers/co2Handler/co2Handler.d \
+src/handlers/humidityHandler/humidityHandler.d \
+src/handlers/temperturHandler/temperturHandler.d \
 src/implementation/co2Impl/co2impl.d \
+src/implementation/humidityImpl/humidityImpl.d \
+src/implementation/tempImpl/temperaturImpl.d \
 LoRaWANHandler.d \
 main.d
 
@@ -142,7 +162,11 @@ FreeRTOS/src/tasks.d \
 FreeRTOS/src/timers.d \
 FreeRTOS/src/variantHooks.d \
 src/handlers/co2Handler/co2Handler.d \
+src/handlers/humidityHandler/humidityHandler.d \
+src/handlers/temperturHandler/temperturHandler.d \
 src/implementation/co2Impl/co2impl.d \
+src/implementation/humidityImpl/humidityImpl.d \
+src/implementation/tempImpl/temperaturImpl.d \
 LoRaWANHandler.d \
 main.d
 
@@ -244,7 +268,35 @@ src/handlers/co2Handler/co2Handler.o: ../src/handlers/co2Handler/co2Handler.c
 	@echo Finished building: $<
 	
 
+src/handlers/humidityHandler/humidityHandler.o: ../src/handlers/humidityHandler/humidityHandler.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../drivers" -I"../FreeRTOS/src"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/handlers/temperturHandler/temperturHandler.o: ../src/handlers/temperturHandler/temperturHandler.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../drivers" -I"../FreeRTOS/src"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 src/implementation/co2Impl/co2impl.o: ../src/implementation/co2Impl/co2impl.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../drivers" -I"../FreeRTOS/src"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/implementation/humidityImpl/humidityImpl.o: ../src/implementation/humidityImpl/humidityImpl.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../drivers" -I"../FreeRTOS/src"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/implementation/tempImpl/temperaturImpl.o: ../src/implementation/tempImpl/temperaturImpl.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../drivers" -I"../FreeRTOS/src"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
