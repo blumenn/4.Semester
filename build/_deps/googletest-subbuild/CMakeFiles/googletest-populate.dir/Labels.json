@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/_deps/googletest-subbuild/CMakeFiles/googletest-populate"
+		},
+		{
+			"file" : "C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/_deps/googletest-subbuild/CMakeFiles/46ea70e18f75092d167b91bbccd4a179/googletest-populate.rule"
+		},
+		{
+			"file" : "C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/_deps/googletest-subbuild/CMakeFiles/633bd20f97f1a548b7f8da740971afb7/googletest-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/_deps/googletest-subbuild/CMakeFiles/6e93486ce84480d189ef6b7680c157ca/googletest-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/_deps/googletest-subbuild/CMakeFiles/6e93486ce84480d189ef6b7680c157ca/googletest-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/_deps/googletest-subbuild/CMakeFiles/6e93486ce84480d189ef6b7680c157ca/googletest-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/_deps/googletest-subbuild/CMakeFiles/6e93486ce84480d189ef6b7680c157ca/googletest-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/_deps/googletest-subbuild/CMakeFiles/6e93486ce84480d189ef6b7680c157ca/googletest-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/_deps/googletest-subbuild/CMakeFiles/6e93486ce84480d189ef6b7680c157ca/googletest-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/_deps/googletest-subbuild/CMakeFiles/6e93486ce84480d189ef6b7680c157ca/googletest-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/_deps/googletest-subbuild/CMakeFiles/6e93486ce84480d189ef6b7680c157ca/googletest-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"googletest-populate"
+		],
+		"name" : "googletest-populate"
+	}
+}

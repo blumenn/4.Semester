@@ -6,7 +6,9 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/src/handlers/co2Handler/interface",
                 "${workspaceFolder}/src/implementation",
-                "${workspaceFolder}/src/handlers/temperturHandler/interface"
+                "${workspaceFolder}/src/handlers/temperturHandler/interface",
+                "${workspaceFolder}/src/implementation/co2Impl",
+                "${workspaceFolder}/drivers"
             ],
             "defines": [
                 "_DEBUG",

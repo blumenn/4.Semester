@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/IoTTest[1]_tests.cmake")
+  include("C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/IoTTest[1]_tests.cmake")
+else()
+  add_test(IoTTest_NOT_BUILT IoTTest_NOT_BUILT)
+endif()
