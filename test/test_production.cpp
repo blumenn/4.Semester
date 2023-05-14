@@ -2,7 +2,7 @@
 #include "gtest/gtest.h"
 
 extern "C" {
-#include "../drivers/mh_z19.h"
+#include "../src/implementation/co2Impl/mh_z19.h"
 
 #include "../src/implementation/co2Impl/co2.h" // Your co2Impl header
 }
