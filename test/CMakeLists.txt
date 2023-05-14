@@ -30,7 +30,7 @@ test_production.cpp
 ${SRCS})
 
 # This makes the test.cpp files able to #include target libraries without errors. 
-include_directories(${CMAKE_SOURCE_DIR}/drivers)
+include_directories(${CMAKE_SOURCE_DIR}/../drivers)
 message("Include directories: ${CMAKE_INCLUDE_PATH}")
 
 
