@@ -1,5 +1,0 @@
-if(EXISTS "C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/temperatureTest[1]_tests.cmake")
-  include("C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/temperatureTest[1]_tests.cmake")
-else()
-  add_test(temperatureTest_NOT_BUILT temperatureTest_NOT_BUILT)
-endif()

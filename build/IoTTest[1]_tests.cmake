@@ -1,5 +1,0 @@
-add_test([=[Co2ImplTest.TestCo2ImplInit]=]  [==[C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/Debug/IoTTest.exe]==] [==[--gtest_filter=Co2ImplTest.TestCo2ImplInit]==] --gtest_also_run_disabled_tests)
-set_tests_properties([=[Co2ImplTest.TestCo2ImplInit]=]  PROPERTIES WORKING_DIRECTORY [==[C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-add_test([=[Co2ImplTest.TestCo2ImplMeasure]=]  [==[C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build/Debug/IoTTest.exe]==] [==[--gtest_filter=Co2ImplTest.TestCo2ImplMeasure]==] --gtest_also_run_disabled_tests)
-set_tests_properties([=[Co2ImplTest.TestCo2ImplMeasure]=]  PROPERTIES WORKING_DIRECTORY [==[C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/build]==] SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
-set(  IoTTest_TESTS Co2ImplTest.TestCo2ImplInit Co2ImplTest.TestCo2ImplMeasure)
