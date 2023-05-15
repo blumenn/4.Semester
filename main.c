@@ -33,6 +33,8 @@ SemaphoreHandle_t xTestSemaphore;
 
 // Prototype for LoRaWAN handler
 void lora_handler_initialise(UBaseType_t lora_handler_task_priority);
+lora_driver_payload_t downlinkPayload;
+MessageBufferHandle_t downLinkMessageBufferHandle;
 
 /*-----------------------------------------------------------*/
 void create_tasks_and_semaphores(void)
@@ -146,8 +148,8 @@ humidity = hih8120_getHumidity();
 temperature = hih8120_getTemperature();
 
 	// Power up the display
-	display_7seg_powerUp();
-	display_7seg_display(humidity, 1);
+	//display_7seg_powerUp();
+	//display_7seg_display(humidity, 1);
 	xSemaphoreGive(xTestSemaphore);
 	}
 	_delay_ms(10);
@@ -171,7 +173,9 @@ void initialiseSystem()
 	// Status Leds driver
 	status_leds_initialise(5); // Priority 5 for internal task
 	// Initialise the LoRaWAN driver without down-link buffer
-	lora_driver_initialise(1, NULL);
+	downLinkMessageBufferHandle = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2); // Here I make room for two downlink messages in the message buffer
+	lora_driver_initialise(1, downLinkMessageBufferHandle); // The parameter is the USART port the RN2483 module is connected to - in this case USART1 - here no message buffer for down-link messages are defined
+		
 	// Create LoRaWAN task and start it up with priority 3
 	lora_handler_initialise(3);
 	// Here the call back function is not needed
