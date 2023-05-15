@@ -36,6 +36,8 @@ src\implementation\humidityImpl\humidityImpl.c
 
 src\implementation\tempImpl\temperaturImpl.c
 
+Wrapper.c
+
 LoRaWANHandler.c
 
 main.c

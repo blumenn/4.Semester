@@ -288,6 +288,9 @@
     <Compile Include="FreeRTOS\src\variantHooks.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="InterfaceWrapper\Wrapper.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\handlers\co2Handler\co2Handler.c">
       <SubType>compile</SubType>
     </Compile>
@@ -336,6 +339,9 @@
     <Compile Include="src\implementation\tempImpl\temperaturimpl.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Wrapper.c">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="drivers\" />
@@ -344,6 +350,7 @@
     <Folder Include="FreeRTOS\Example\" />
     <Folder Include="FreeRTOS\FreeRTOSTraceDriver\" />
     <Folder Include="FreeRTOS\src\" />
+    <Folder Include="InterfaceWrapper\" />
     <Folder Include="src\" />
     <Folder Include="src\handlers\" />
     <Folder Include="src\handlers\co2Handler\" />
