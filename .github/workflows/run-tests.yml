@@ -31,6 +31,5 @@ jobs:
 
     - name: Test
       working-directory: ${{github.workspace}}/build/Debug
-      # Use the appropriate shell based on your platform
-      shell: cmd
-      run: IoTTest.exe
+      run: |
+        ./IoTTest.exe
