@@ -8,7 +8,8 @@
                 "${workspaceFolder}/src/implementation",
                 "${workspaceFolder}/src/handlers/temperturHandler/interface",
                 "${workspaceFolder}/src/implementation/co2Impl",
-                "${workspaceFolder}/drivers"
+                "${workspaceFolder}/drivers",
+                "${workspaceFolder}/build/_deps/googletest-src/googletest/include"
             ],
             "defines": [
                 "_DEBUG",

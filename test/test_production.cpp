@@ -3,10 +3,10 @@
 
 extern "C" {
 #include "../src/implementation/co2Impl/mh_z19.h"
+#include "../src/implementation/co2Impl/co2.h" 
 
-#include "../src/implementation/co2Impl/co2.h" // Your co2Impl header
 }
-DEFINE_FFF_GLOBALS	//	Initialize the framework
+DEFINE_FFF_GLOBALS	
 
 // Define fake functions
 FAKE_VOID_FUNC(mh_z19_initialise, serial_comPort_t);
@@ -23,7 +23,17 @@ protected:
         RESET_FAKE(mh_z19_injectCallBack);
         RESET_FAKE(mh_z19_takeMeassuring);
     }
+    void TearDown() override {
+
+	}
 };
+
+TEST_F(Co2ImplTest, TestGetMeasurement) {
+	int co2ppm;
+	co2ppm = co2impl_getMeasurement();
+	EXPECT_EQ(0, co2ppm);
+}
+
 
 TEST_F(Co2ImplTest, TestCo2ImplInit) {
     co2impl_init();
@@ -38,4 +48,3 @@ TEST_F(Co2ImplTest, TestCo2ImplMeasure) {
     
     EXPECT_EQ(mh_z19_takeMeassuring_fake.call_count, 1);
 }
-

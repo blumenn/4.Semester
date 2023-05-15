@@ -21,7 +21,9 @@ set(SOURCES_TEST
     ${SRCS})
 
 # This makes the test.cpp files able to #include target libraries without errors. 
-include_directories(${CMAKE_SOURCE_DIR}/../drivers)
+include_directories(
+    ${CMAKE_SOURCE_DIR}/../drivers
+    )
 
 
 # Something to 
