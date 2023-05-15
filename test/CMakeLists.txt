@@ -10,45 +10,31 @@ set(DOWNLOAD_EXTRACT_TIMESTAMP true)
 include(FetchContent)
 FetchContent_Declare(
     googletest
-URL 
-https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-DOWNLOAD_EXTRACT_TIMESTAMP true)
-
-# For Windows: Prevent overriding the parent project's compiler/linker settings
-set(gtest_force_shared_crt OFF CACHE BOOL "Force gtest to use the same runtime library")
-
-
-FetchContent_MakeAvailable(googletest )
+    URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip)
+FetchContent_MakeAvailable(googletest)
 
 message("Current source dir: ${CMAKE_CURRENT_SOURCE_DIR}")
 
 set(SOURCES_TEST
-../src/implementation/co2Impl/co2impl.c
-test_production.cpp
-
-
-${SRCS})
+    ../src/implementation/co2Impl/co2impl.c
+    test_production.cpp
+    ${SRCS})
 
 # This makes the test.cpp files able to #include target libraries without errors. 
 include_directories(${CMAKE_SOURCE_DIR}/../drivers)
-message("Include directories: ${CMAKE_INCLUDE_PATH}")
-
-
+message("Include directories: ${CMAKE_INCLUDE_DIRECTORIES}")
 
 # Something to 
 enable_testing()
 
-add_executable(
-${projectName}
-${SOURCES_TEST})
+add_executable(${projectName} ${SOURCES_TEST})
 
 if(MSVC)
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 endif(MSVC)
 
-target_link_libraries(
-    ${projectName}
-    GTest::gtest_main)
-    include(GoogleTest)
-    gtest_discover_tests(${projectName})
+target_link_libraries(${projectName} GTest::gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(${projectName})
