@@ -24,6 +24,18 @@ FreeRTOS\src\timers.c
 
 FreeRTOS\src\variantHooks.c
 
+src\handlers\co2Handler\co2Handler.c
+
+src\handlers\humidityHandler\humidityHandler.c
+
+src\handlers\temperturHandler\temperturHandler.c
+
+src\implementation\co2Impl\co2impl.c
+
+src\implementation\humidityImpl\humidityImpl.c
+
+src\implementation\tempImpl\temperaturImpl.c
+
 LoRaWANHandler.c
 
 main.c
