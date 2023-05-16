@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <hih8120.h>
 #include <semphr.h>
+#include <util/delay.h>
 
 #include "temperaturimpl.h"
 
