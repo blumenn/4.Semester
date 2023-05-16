@@ -15,8 +15,8 @@
 #include <ATMEGA_FreeRTOS.h>
 #include <task.h>
 #include <semphr.h>
-#include "./src/handlers/co2Handler/interface/co2Handler.h"
-#include "src/handlers/temperturHandler/interface/temperturHandler.h"
+#include "src/handlers/co2Handler/interface/co2Handler.h"
+#include "src/handlers/temperturHandler/temperturHandler.h"
 
 
 
@@ -132,7 +132,7 @@ void task2( void *pvParameters )
 		puts("Task2"); // stdio functions are not reentrant - Should normally be protected by MUTEX
 		PORTA ^= _BV(PA7);
 		
-		 
+/*		 
 if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
 if ( HIH8120_OK != hih8120_wakeup() )
 {
@@ -156,7 +156,7 @@ temperature = hih8120_getTemperature();
 	//display_7seg_display(humidity, 1);
 	xSemaphoreGive(xTestSemaphore);
 	}
-	_delay_ms(10);
+*/	_delay_ms(10);
 
 }
 }

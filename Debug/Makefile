@@ -50,8 +50,6 @@ SUBDIRS :=  \
 ../src/handlers/temperturHandler/ \
 ../src/handlers/temperturHandler/interface/ \
 ../src/handlers/temperturHandler/interface/ \
-../src/handlers/tempHandler/ \
-../src/handlers/tempHandler/interface/ \
 ../src/implementation/ \
 ../src/implementation/co2Impl/ \
 ../src/implementation/humidityImpl/ \
