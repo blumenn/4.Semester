@@ -22,7 +22,7 @@ if ( HIH8120_OK !=  hih8120_measure() )
        // Something went wrong
        // Investigate the return code further
 }
-temp = hih8120_getHumidity();
+temp = hih8120_getHumidity_x10();
 xSemaphoreGive(xTestSemaphore);
     }
 }

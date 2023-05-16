@@ -32,7 +32,7 @@ if ( HIH8120_OK !=  hih8120_measure() )
        // Something went wrong
        // Investigate the return code further
 }
-temp = hih8120_getTemperature();
+temp = hih8120_getTemperature_x10();
 xSemaphoreGive(xTestSemaphore);
     }
 }
