@@ -15,10 +15,14 @@
 #include <ATMEGA_FreeRTOS.h>
 #include <task.h>
 #include <semphr.h>
+#include "src/handlers/co2Handler/interface/co2Handler.h"
+#include "src/handlers/temperturHandler/temperturHandler.h"
+
 
 
 #include <stdio_driver.h>
 #include <serial.h>
+
 
  // Needed for LoRaWAN
 #include <lora_driver.h>
@@ -33,6 +37,8 @@ SemaphoreHandle_t xTestSemaphore;
 
 // Prototype for LoRaWAN handler
 void lora_handler_initialise(UBaseType_t lora_handler_task_priority);
+lora_driver_payload_t downlinkPayload;
+MessageBufferHandle_t downLinkMessageBufferHandle;
 
 /*-----------------------------------------------------------*/
 void create_tasks_and_semaphores(void)
@@ -126,7 +132,7 @@ void task2( void *pvParameters )
 		puts("Task2"); // stdio functions are not reentrant - Should normally be protected by MUTEX
 		PORTA ^= _BV(PA7);
 		
-		 
+/*		 
 if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
 if ( HIH8120_OK != hih8120_wakeup() )
 {
@@ -146,45 +152,42 @@ humidity = hih8120_getHumidity();
 temperature = hih8120_getTemperature();
 
 	// Power up the display
-	display_7seg_powerUp();
-	display_7seg_display(humidity, 1);
+	//display_7seg_powerUp();
+	//display_7seg_display(humidity, 1);
 	xSemaphoreGive(xTestSemaphore);
 	}
-	_delay_ms(10);
+*/	_delay_ms(10);
 
 }
 }
 
 /*-----------------------------------------------------------*/
+
 void initialiseSystem()
 {
-	// Set output ports for leds used in the example
+	
 	DDRA |= _BV(DDA0) | _BV(DDA7);
 
-	// Make it possible to use stdio on COM port 0 (USB) on Arduino board - Setting 57600,8,N,1
+	
 	stdio_initialise(ser_USART0);
-	// Let's create some tasks
+	
 	create_tasks_and_semaphores();
 
 	// vvvvvvvvvvvvvvvvv BELOW IS LoRaWAN initialisation vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 	// Status Leds driver
 	status_leds_initialise(5); // Priority 5 for internal task
 	// Initialise the LoRaWAN driver without down-link buffer
-	lora_driver_initialise(1, NULL);
+	downLinkMessageBufferHandle = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2); // Here I make room for two downlink messages in the message buffer
+	lora_driver_initialise(1, downLinkMessageBufferHandle); // The parameter is the USART port the RN2483 module is connected to - in this case USART1 - here no message buffer for down-link messages are defined
+		
 	// Create LoRaWAN task and start it up with priority 3
 	lora_handler_initialise(3);
-	// Here the call back function is not needed
+	
 	display_7seg_initialise(NULL); 
- if ( HIH8120_OK == hih8120_initialise() )
-{
-       // Driver initialised OK
-       // Always check what hih8120_initialise() returns
-}
 
 _delay_ms(1000);
-
-mh_z19_initialise(ser_USART3); 
-mh_z19_injectCallBack(Co2CallBack);
+co2_init();
+temp_init();
 
 }
 

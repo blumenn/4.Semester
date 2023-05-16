@@ -6,6 +6,10 @@
 */
 #include <stddef.h>
 #include <stdio.h>
+#include "src/handlers/co2Handler/interface/co2Handler.h"
+#include "./InterfaceWrapper/Wrapper.h"
+
+
 
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
@@ -18,7 +22,22 @@ extern SemaphoreHandle_t xTestSemaphore;
 
 void lora_handler_task( void *pvParameters );
 
+
 static lora_driver_payload_t _uplink_payload;
+
+extern lora_driver_payload_t downlinkPayload;
+
+extern MessageBufferHandle_t downLinkMessageBufferHandle;
+
+uint16_t maxHumSetting; // Max Humidity
+int16_t maxTempSetting; // Max Temperature
+uint16_t minHumSetting;
+
+uint16_t minTempsetting;
+
+uint16_t maxCo2Setting;
+
+uint16_t minCo2Setting;
 
 void lora_handler_initialise(UBaseType_t lora_handler_task_priority)
 {
@@ -30,6 +49,7 @@ void lora_handler_initialise(UBaseType_t lora_handler_task_priority)
 	,  lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	,  NULL );
 }
+
 
 static void _lora_setup(void)
 {
@@ -118,33 +138,64 @@ void lora_handler_task( void *pvParameters )
 
 	_lora_setup();
 
-	_uplink_payload.len = 6;
-	_uplink_payload.portNo = 2;
+	wrapper_init();
+	
 
 	TickType_t xLastWakeTime;
 	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
 	xLastWakeTime = xTaskGetTickCount();
 	
+//	MessageBufferHandle_t downLinkMessageBufferHandle = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2); // Here I make room for two downlink messages in the message buffer
+//	lora_driver_initialise(ser_USART1, downLinkMessageBufferHandle); // The parameter is the USART port the RN2483 module is connected to - in this case USART1 - here no message buffer for down-link messages are defined
+		
+	
 	for(;;)
 	{
+		display_7seg_powerUp();
+		maxHumSetting =1+maxHumSetting;
+		display_7seg_display((float)maxHumSetting, 1);
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-
-		if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE){
+		
+		_uplink_payload = wrapperhandler();
+		
+		if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE)
+		{
 		// Some dummy payload
-		uint16_t hum = (uint16_t) hih8120_getHumidity(); // Dummy humidity
-		int16_t temp = (uint16_t) hih8120_getTemperature(); // Dummy temp
-		uint16_t co2_ppm = 1050; // Dummy CO2
-
-		_uplink_payload.bytes[0] = hum >> 8;
-		_uplink_payload.bytes[1] = hum & 0xFF;
-		_uplink_payload.bytes[2] = temp >> 8;
-		_uplink_payload.bytes[3] = temp & 0xFF;
-		_uplink_payload.bytes[4] = co2_ppm >> 8;
-		_uplink_payload.bytes[5] = co2_ppm & 0xFF;
-
+		
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
+		
 		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
-		xSemaphoreGive(xTestSemaphore);
+
+
+		// this code must be in the loop of a FreeRTOS task!
+		xMessageBufferReceive(downLinkMessageBufferHandle, &downlinkPayload, sizeof(lora_driver_payload_t), 10000);
+		//printf("DOWN LINK: from port: %d with %d bytes received!", downlinkPayload.portNo, downlinkPayload.len); // Just for Debug
+		if (2 == downlinkPayload.len) // Check that we have got the expected 4 bytes
+		{
+       // decode the payload into our variales
+       maxHumSetting = (downlinkPayload.bytes[0] << 8) + downlinkPayload.bytes[1];
+	   
+       maxTempSetting = (downlinkPayload.bytes[2] << 8) + downlinkPayload.bytes[3];
+	   
 		}
+		
+		if(6 == downlinkPayload.len){
+			       maxHumSetting = (downlinkPayload.bytes[0] << 8) + downlinkPayload.bytes[1];
+			       
+			       minHumSetting = (downlinkPayload.bytes[2] << 8) + downlinkPayload.bytes[3];
+				   
+				   maxTempSetting = (downlinkPayload.bytes[4] << 8) + downlinkPayload.bytes[5];
+				   
+				   minTempsetting = (downlinkPayload.bytes[6] << 8) + downlinkPayload.bytes[7];
+				   
+				   maxCo2Setting = (downlinkPayload.bytes[8] << 8) + downlinkPayload.bytes[9];
+				   
+				   minCo2Setting = (downlinkPayload.bytes[10] << 8) + downlinkPayload.bytes[11];
+				   
+		}
+				xSemaphoreGive(xTestSemaphore);
+		}
+	
+		
 	}
 }

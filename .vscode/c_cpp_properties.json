@@ -3,7 +3,14 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/src/handlers/co2Handler/interface",
+                "${workspaceFolder}/src/implementation",
+                "${workspaceFolder}/src/handlers/temperturHandler/interface",
+                "${workspaceFolder}/src/implementation/co2Impl",
+                "${workspaceFolder}/drivers",
+                "${workspaceFolder}/build/_deps/googletest-src/googletest/include",
+                "${workspaceFolder}/FreeRTOS/src"
             ],
             "defines": [
                 "_DEBUG",

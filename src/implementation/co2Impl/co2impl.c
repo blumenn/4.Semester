@@ -1,26 +1,23 @@
-
-
 #include <stddef.h>
 #include "co2.h"
-#include <mh_z19.h>
-#include <serial.h>
-
+#include "mh_z19.h"
+#include "serial.h"
+#include <stdio.h>
 uint16_t ppm;
 
-void co2CallBack(uint16_t ppmCall);
-
-void co2_sensor_init()
-{
-	mh_z19_initialise(ser_USART3);
-	mh_z19_injectCallBack(co2CallBack);
-}
 
 void co2CallBack(uint16_t ppmCall)
 {
 	ppm = ppmCall;
 }
 
-void co2_measure()
+void co2impl_init(){
+	mh_z19_initialise(ser_USART3); 
+	mh_z19_injectCallBack(co2CallBack);
+}
+
+
+void co2impl_measure()
 {
 	mh_z19_returnCode_t returnCode = mh_z19_takeMeassuring();
 	
@@ -31,7 +28,7 @@ void co2_measure()
 }
 
 
-uint16_t co2_getMeasurement()
+uint16_t co2impl_getMeasurement()
 {
 	return ppm;
 }
