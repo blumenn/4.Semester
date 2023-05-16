@@ -27,7 +27,12 @@ hum = hih8120_getHumidityPercent_x10();
 xSemaphoreGive(xTestSemaphore);
     }
 }
+
 uint16_t humimpl_getMeasurement(){
-    
-return hum;
+	uint16_t returnhum;
+    if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
+		returnhum = hum;
+		xSemaphoreGive(xTestSemaphore);
+	}
+return returnhum;
 }
