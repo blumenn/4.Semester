@@ -7,6 +7,8 @@
 #include <stddef.h>
 #include <stdio.h>
 #include "src/handlers/co2Handler/interface/co2Handler.h"
+#include "./InterfaceWrapper/Wrapper.h"
+
 
 
 #include <ATMEGA_FreeRTOS.h>
@@ -19,6 +21,7 @@ extern SemaphoreHandle_t xTestSemaphore;
 #define LORA_appKEY "458FC671144070F154BC8984B6051DA7"
 
 void lora_handler_task( void *pvParameters );
+
 
 static lora_driver_payload_t _uplink_payload;
 
@@ -158,18 +161,11 @@ void lora_handler_task( void *pvParameters )
 		if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE)
 		{
 		// Some dummy payload
-		uint16_t hum = (uint16_t) hih8120_getHumidity(); // Dummy humidity
-		uint16_t temp = (uint16_t) hih8120_getTemperature(); // Dummy temp
-		uint16_t co2_ppm = 1050; // Dummy CO2
-
-		_uplink_payload.bytes[0] = hum >> 8;
-		_uplink_payload.bytes[1] = hum & 0xFF;
-		_uplink_payload.bytes[2] = temp >> 8;
-		_uplink_payload.bytes[3] = temp & 0xFF;
-		_uplink_payload.bytes[4] = co2_ppm >> 8;
-		_uplink_payload.bytes[5] = co2_ppm & 0xFF;
-
+		
+		_uplink_payload = wrapperhandler();
+		
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
+		
 		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
 
 

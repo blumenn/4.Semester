@@ -2,6 +2,7 @@
 .vscode/
 Debug/
 .vs/
+/build/
 
 #template 
 # Prerequisites
