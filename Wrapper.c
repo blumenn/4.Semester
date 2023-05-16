@@ -2,6 +2,11 @@
 #include "./src/handlers/co2Handler/interface/co2Handler.h"
 #include "./src/handlers/HumidityHandler/interface/humidityHandler.h"
 #include "./src/handlers/temperturHandler/interface/temperturHandler.h"
+#include "./InterfaceWrapper/Wrapper.h"
+#include <lora_driver.h>
+#include <ATMEGA_FreeRTOS.h>
+#include <semphr.h>
+#include <status_leds.h>
 
 static lora_driver_payload_t _uplink_payload;
 
