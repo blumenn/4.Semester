@@ -137,7 +137,7 @@ void lora_handler_task( void *pvParameters )
 		if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE){
 		// Some dummy payload
 		
-		wrapperhandler();
+		_uplink_payload = wrapperhandler();
 		
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		
