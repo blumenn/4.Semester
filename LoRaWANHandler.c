@@ -142,7 +142,7 @@ void lora_handler_task( void *pvParameters )
 	
 
 	TickType_t xLastWakeTime;
-	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
+	const TickType_t xFrequency = pdMS_TO_TICKS(3000UL); // Upload message every 5 minutes (300000 ms)
 	xLastWakeTime = xTaskGetTickCount();
 	
 //	MessageBufferHandle_t downLinkMessageBufferHandle = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2); // Here I make room for two downlink messages in the message buffer
@@ -156,12 +156,11 @@ void lora_handler_task( void *pvParameters )
 		display_7seg_display((float)maxHumSetting, 1);
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 		
-
+		_uplink_payload = wrapperhandler();
+		
 		if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE)
 		{
 		// Some dummy payload
-		
-		_uplink_payload = wrapperhandler();
 		
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		

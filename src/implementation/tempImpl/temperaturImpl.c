@@ -1,3 +1,4 @@
+
 #include <ATMEGA_FreeRTOS.h>
 #include <stdint.h>
 #include <hih8120.h>
@@ -8,7 +9,7 @@
 
 
 
-uint16_t temp;
+static uint16_t temp;
 extern SemaphoreHandle_t xTestSemaphore;
 
 
@@ -37,7 +38,11 @@ xSemaphoreGive(xTestSemaphore);
     }
 }
 uint16_t tempimpl_getMeasurement(){
-    
-return temp;
+	uint16_t returntemp;
+    if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
+		returntemp = temp;
+		xSemaphoreGive(xTestSemaphore);
+	}
+return returntemp;
 }
 
