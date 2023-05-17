@@ -6,6 +6,10 @@
 
 static config configuration;
 
+void servoHandlerInit(){
+    servo_init();
+}
+
 void setConfig( uint16_t maxHumSetting,
     uint16_t minHumSetting,
     uint16_t maxTempSetting,
@@ -32,3 +36,4 @@ void servoMeasuring(void){
     }
     
 }
+c
