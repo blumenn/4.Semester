@@ -3,9 +3,10 @@
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
 #include "humidityImpl.h"
+#include <util/delay.h>
 
 
-uint16_t temp;
+static uint16_t hum;
 extern SemaphoreHandle_t xTestSemaphore;
 
 
@@ -22,11 +23,16 @@ if ( HIH8120_OK !=  hih8120_measure() )
        // Something went wrong
        // Investigate the return code further
 }
-temp = hih8120_getHumidity_x10();
+hum = hih8120_getHumidityPercent_x10();
 xSemaphoreGive(xTestSemaphore);
     }
 }
+
 uint16_t humimpl_getMeasurement(){
-    
-return temp;
+	uint16_t returnhum;
+    if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
+		returnhum = hum;
+		xSemaphoreGive(xTestSemaphore);
+	}
+return returnhum;
 }

@@ -156,12 +156,11 @@ void lora_handler_task( void *pvParameters )
 		display_7seg_display((float)maxHumSetting, 1);
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 		
-
+		_uplink_payload = wrapperhandler();
+		
 		if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE)
 		{
 		// Some dummy payload
-		
-		_uplink_payload = wrapperhandler();
 		
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		
