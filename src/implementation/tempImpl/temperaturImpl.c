@@ -10,7 +10,9 @@
 
 uint16_t temp;
 extern SemaphoreHandle_t xTestSemaphore;
-
+void doNothing(){
+	return;
+}
 
 void tempimpl_init(){
      if ( HIH8120_OK == hih8120_initialise() )
