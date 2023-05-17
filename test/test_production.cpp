@@ -1,6 +1,5 @@
 #include "fff.h"
 #include "gtest/gtest.h"
-#include <ATMEGA_FreeRTOS.h>
 #include <stdint.h>
 #include <hih8120.h>
 #include <semphr.h>
@@ -91,13 +90,13 @@ TEST_F(TempImplTest, TestGetMeasurement) {
 TEST_F(TempImplTest, TestTempImplInit) {
     tempimpl_init();
     
-    EXPECT_EQ(hih8120_initialise_Fake.call.count, 1);
-    //EXPECT_EQ(HIH8120_DRIVER_NOT_INITIALISED, false);
+    EXPECT_EQ(hih8120_initialise_fake, 1);
+    EXPECT_EQ(HIH8120_DRIVER_NOT_INITIALISED, false);
 }
 
 TEST_F(TempImplTest, TestTempImplMeasure) {
-    hih8120_measure = HIH8120_OK;
+    hih8120_measure_fake.return_val = HIH8120_OK;
     tempimpl_measure();
     
-    EXPECT_EQ(hih8120_measure_Fake.call_count, 1);
+    EXPECT_EQ(hih8120_measure_fake, 1);
 }
