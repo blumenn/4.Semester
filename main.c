@@ -17,7 +17,7 @@
 #include <semphr.h>
 #include "./src/handlers/co2Handler/interface/co2Handler.h"
 #include "src/handlers/temperturHandler/interface/temperturHandler.h"
-
+#include "../src/handlers/servoHandler/servoHandler.h"
 
 
 #include <stdio_driver.h>
@@ -188,6 +188,7 @@ void initialiseSystem()
 _delay_ms(1000);
 co2_init();
 temp_init();
+servoHandlerInit();
 
 }
 

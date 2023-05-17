@@ -309,6 +309,12 @@
     <Compile Include="src\handlers\humidityHandler\interface\humidityHandler.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\handlers\servoHandler\servoHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\handlers\servoHandler\servoHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\handlers\temperturHandler\interface\temperturHandler.h">
       <SubType>compile</SubType>
     </Compile>
@@ -328,6 +334,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\implementation\humidityImpl\humidityImpl.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\implementation\servo\servoImpl.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\implementation\servo\servoImpl.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\implementation\tempImpl\temperaturImpl.c">
@@ -357,6 +369,7 @@
     <Folder Include="src\handlers\co2Handler\interface\" />
     <Folder Include="src\handlers\humidityHandler\" />
     <Folder Include="src\handlers\humidityHandler\interface\" />
+    <Folder Include="src\handlers\servoHandler\" />
     <Folder Include="src\handlers\temperturHandler\" />
     <Folder Include="src\handlers\temperturHandler\" />
     <Folder Include="src\handlers\temperturHandler\interface\" />
@@ -366,6 +379,7 @@
     <Folder Include="src\implementation\" />
     <Folder Include="src\implementation\co2Impl\" />
     <Folder Include="src\implementation\humidityImpl\" />
+    <Folder Include="src\implementation\servo\" />
     <Folder Include="src\implementation\tempImpl\" />
   </ItemGroup>
   <ItemGroup>

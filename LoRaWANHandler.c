@@ -193,7 +193,7 @@ void lora_handler_task( void *pvParameters )
 				   maxCo2Setting = (downlinkPayload.bytes[8] << 8) + downlinkPayload.bytes[9];
 				   
 				   minCo2Setting = (downlinkPayload.bytes[10] << 8) + downlinkPayload.bytes[11];
-				   
+				   setConfig(maxHumSetting,minHumSetting,maxTempSetting,minTempsetting,maxCo2Setting,minCo2Setting);
 				   
 		}
 				xSemaphoreGive(xTestSemaphore);
