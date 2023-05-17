@@ -96,7 +96,7 @@ TEST_F(TempImplTest, TestTempImplInit) {
 }
 
 TEST_F(TempImplTest, TestTempImplMeasure) {
-    hih8120_measure = hih8120_OK;
+    hih8120_measure = HIH8120_OK;
     tempimpl_measure();
     
     EXPECT_EQ(hih8120_measure_Fake.call_count, 1);
