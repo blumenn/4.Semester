@@ -1,11 +1,19 @@
 #include "fff.h"
 #include "gtest/gtest.h"
+#include <ATMEGA_FreeRTOS.h>
+#include <stdint.h>
+#include <hih8120.h>
+#include <semphr.h>
+
+
 
 extern "C" {
 #include "../src/implementation/co2Impl/mh_z19.h"
 #include "../src/implementation/co2Impl/co2.h" 
+#include "../src/implementation/tempImpl/temperaturImpl.h"
 
 }
+
 DEFINE_FFF_GLOBALS	
 
 // Define fake functions
@@ -47,4 +55,49 @@ TEST_F(Co2ImplTest, TestCo2ImplMeasure) {
     co2impl_measure();
     
     EXPECT_EQ(mh_z19_takeMeassuring_fake.call_count, 1);
+}
+
+
+
+
+
+DEFINE_FFF_GLOBALS	
+
+// Define fake functions
+FAKE_VOID_FUNC(hih8120_initialise, serial_comPort_t);
+FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_measure);
+FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_getTemperature_x10, uint16_t*);
+
+class TempImplTest : public testing::Test {
+protected:
+    void SetUp() override {
+        // Resets the fake functions
+        RESET_FAKE(hih8120_initialise);
+        RESET_FAKE(hih8120_measure);
+        RESET_FAKE(hih8120_getTemperature_x10);
+    }
+    void TearDown() override {
+
+	}
+};
+
+TEST_F(TempImplTest, TestGetMeasurement) {
+	int temp;
+	temp = tempimpl_getMeasurement();
+	EXPECT_EQ(0, temp);
+}
+
+
+TEST_F(TempImplTest, TestTempImplInit) {
+    tempimpl_init();
+    
+    EXPECT_EQ(hih8120_initialise_Fake.call.count, 1);
+    //EXPECT_EQ(HIH8120_DRIVER_NOT_INITIALISED, false);
+}
+
+TEST_F(TempImplTest, TestTempImplMeasure) {
+    hih8120_measure = hih8120_OK;
+    tempimpl_measure();
+    
+    EXPECT_EQ(hih8120_measure_Fake.call_count, 1);
 }
