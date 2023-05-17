@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "cppvsdbg",
+        "request": "launch",
+        "name": "Debug main",
+        "program": "${workspaceFolder}/build/Release/IoTTest.exe",
+        "args": [],
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}"
+      },
+      {
+        "type": "cppvsdbg",
+        "request": "launch",
+        "name": "Run the motherf'ing gtest",
+        "program": "${workspaceFolder}/build/Release/IoTTest.exe",
+        "args": [],
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}"
+      }
+    ]
+  }
+  

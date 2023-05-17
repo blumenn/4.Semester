@@ -1,4 +1,4 @@
-#include "servo.h"
+#include "servoImpl.h"
 
 void servo_init(){
     rc_servo_initialise();

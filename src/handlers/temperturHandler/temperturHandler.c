@@ -10,7 +10,9 @@ void temp_init(){
 
 
 uint16_t temp_getMeasurement(){
+    
 tempimpl_measure();
+
 tempimpl_getMeasurement();
 }
 
