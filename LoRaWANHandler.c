@@ -30,7 +30,7 @@ extern lora_driver_payload_t downlinkPayload;
 extern MessageBufferHandle_t downLinkMessageBufferHandle;
 
 uint16_t maxHumSetting; // Max Humidity
-int16_t maxTempSetting; // Max Temperature
+uint16_t maxTempSetting; // Max Temperature
 uint16_t minHumSetting;
 
 uint16_t minTempsetting;
@@ -191,7 +191,7 @@ void lora_handler_task( void *pvParameters )
 				   maxCo2Setting = (downlinkPayload.bytes[8] << 8) + downlinkPayload.bytes[9];
 				   
 				   minCo2Setting = (downlinkPayload.bytes[10] << 8) + downlinkPayload.bytes[11];
-				   
+				  
 		}
 				xSemaphoreGive(xTestSemaphore);
 		}
