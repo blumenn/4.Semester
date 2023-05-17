@@ -188,6 +188,7 @@ void initialiseSystem()
 _delay_ms(1000);
 co2_init();
 temp_init();
+servo_handler_init();
 
 }
 
