@@ -15,6 +15,7 @@
 #include <semphr.h>
 #include <lora_driver.h>
 #include <status_leds.h>
+#include "../src/handlers/servoHandler/servoHandler.h"
 extern SemaphoreHandle_t xTestSemaphore;
 // Parameters for OTAA join - You have got these in a mail from IHA
 #define LORA_appEUI "7D8AC642ABB372BC"
@@ -192,6 +193,7 @@ void lora_handler_task( void *pvParameters )
 				   maxCo2Setting = (downlinkPayload.bytes[8] << 8) + downlinkPayload.bytes[9];
 				   
 				   minCo2Setting = (downlinkPayload.bytes[10] << 8) + downlinkPayload.bytes[11];
+				   
 				   
 		}
 				xSemaphoreGive(xTestSemaphore);
