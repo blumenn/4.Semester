@@ -1,8 +1,8 @@
-#include "servoHandler.h"
+#pragma once "servoHandler.h"
 #include "co2Handler.h"
 #include "../handlers/HumidityHandler/interface/humidityHandler.h"
 #include "temperturHandler.h"
-#include "../implementation/servo/servoImpl.h"
+#include "../src/implementation/servo/servoImpl.h"
 
 static config configuration;
 
