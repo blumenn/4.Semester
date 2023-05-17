@@ -1,7 +1,7 @@
-#pragma once "servoHandler.h"
-#include "co2Handler.h"
-#include "../handlers/HumidityHandler/interface/humidityHandler.h"
-#include "temperturHandler.h"
+#include "servoHandler.h"
+#include "../src/handlers/co2Handler/interface/co2Handler.h"
+#include "../src/handlers/HumidityHandler/interface/humidityHandler.h"
+#include "../src/handlers/temperturHandler/interface/temperturHandler.h"
 #include "../src/implementation/servo/servoImpl.h"
 
 static config configuration;
@@ -36,4 +36,4 @@ void servoMeasuring(void){
     }
     
 }
-c
+
