@@ -138,7 +138,7 @@ void lora_handler_task( void *pvParameters )
 
 	_lora_setup();
 
-	
+	wrapper_init();
 
 	TickType_t xLastWakeTime;
 	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
@@ -151,8 +151,8 @@ void lora_handler_task( void *pvParameters )
 	for(;;)
 	{
 		display_7seg_powerUp();
-		maxHumSetting =1+maxHumSetting;
-		display_7seg_display((float)maxHumSetting, 1);
+// 		maxHumSetting =1+maxHumSetting;
+// 		/display_7seg_display((float)maxHumSetting, 1);
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 		
 		_uplink_payload = wrapperhandler();

@@ -2,6 +2,7 @@
 #include <ATMEGA_FreeRTOS.h>
 #include <stdint.h>
 #include <queue.h>
+#include "../src/implementation/tempImpl/temperaturImpl.h"
 extern QueueHandle_t xQueue;
 
 void temp_init(){
