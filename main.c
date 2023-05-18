@@ -133,6 +133,7 @@ void task2( void *pvParameters )
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 		puts("Task2"); // stdio functions are not reentrant - Should normally be protected by MUTEX
 		PORTA ^= _BV(PA7);
+		servo_measuring();
 		
 /*		 
 if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){

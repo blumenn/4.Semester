@@ -47,7 +47,7 @@ void servo_measuring(void){
         {
     uint16_t temp = temp_getMeasurement();
     uint16_t hum = hum_getMeasurement();
-    uint16_t co2 = co2_getMeasurement();
+   uint16_t co2 = co2_getMeasurement();
     if (configuration.maxHumSetting<hum)
     {
         servoOpenWindow();
