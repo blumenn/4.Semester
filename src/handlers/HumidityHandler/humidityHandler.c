@@ -3,6 +3,7 @@
 //#include "./src/handlers/HumidityHandler/interface/humidityHandler.h"
 #include "humidityHandler.h"
 #include <ATMEGA_FreeRTOS.h>
+#include <queue.h>
 extern QueueHandle_t xQueue;
 
 uint16_t hum_getMeasurement(){

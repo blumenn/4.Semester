@@ -1,8 +1,8 @@
 #include "temperturHandler.h"
 #include <ATMEGA_FreeRTOS.h>
-QueueHandle_t xQueue;
 #include <stdint.h>
-
+#include <queue.h>
+extern QueueHandle_t xQueue;
 
 void temp_init(){
     tempimpl_init();

@@ -4,8 +4,9 @@
 #include "handlers/co2Handler/interface/co2Handler.h"
 #include "handlers/HumidityHandler/humidityHandler.h"
 #include <ATMEGA_FreeRTOS.h>
+#include <queue.h>
 static config configuration;
-QueueHandle_t xQueue;
+extern QueueHandle_t xQueue;
 
 void servo_handler_init(void){
 servo_init();
