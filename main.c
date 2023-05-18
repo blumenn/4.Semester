@@ -18,6 +18,7 @@
 #include "src/handlers/co2Handler/interface/co2Handler.h"
 #include "src/handlers/temperturHandler/temperturHandler.h"
 #include "src/handlers/servoHandler/servoHandler.h"
+#include "./InterfaceWrapper/Wrapper.h"
 
 
 
@@ -186,6 +187,7 @@ void initialiseSystem()
 	
 	display_7seg_initialise(NULL); 
 
+wrapper_init();
 _delay_ms(1000);
 co2_init();
 temp_init();

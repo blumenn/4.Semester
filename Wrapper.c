@@ -14,7 +14,7 @@ static int try;
 void wrapper_init(){
 	_uplink_payload.len = 6;
 	_uplink_payload.portNo = 2;
-	xQueue =
+	xQueue;
 	if (xQueue != NULL)
 	{
 		return;

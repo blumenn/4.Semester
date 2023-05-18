@@ -1,6 +1,6 @@
 #include "temperturHandler.h"
-
-
+#include <ATMEGA_FreeRTOS.h>
+QueueHandle_t xQueue;
 #include <stdint.h>
 
 
@@ -13,7 +13,7 @@ uint16_t temp_getMeasurement(){
     
 tempimpl_measure();
 
-tempimpl_getMeasurement();
+return tempimpl_getMeasurement();
 }
 
 

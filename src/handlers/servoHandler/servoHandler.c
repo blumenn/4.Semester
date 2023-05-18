@@ -3,7 +3,9 @@
 #include "handlers/temperturHandler/temperturHandler.h"
 #include "handlers/co2Handler/interface/co2Handler.h"
 #include "handlers/HumidityHandler/humidityHandler.h"
+#include <ATMEGA_FreeRTOS.h>
 static config configuration;
+QueueHandle_t xQueue;
 
 void servo_handler_init(void){
 servo_init();
@@ -60,4 +62,7 @@ void servo_measuring(void){
     
     
     
+}
+open(){
+	servoOpenWindow();
 }
