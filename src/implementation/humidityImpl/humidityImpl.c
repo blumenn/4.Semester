@@ -11,7 +11,7 @@ extern SemaphoreHandle_t xTestSemaphore;
 
 
 void humimpl_measure(){
-    if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
+    if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(2000))==pdTRUE){
     if ( HIH8120_OK != hih8120_wakeup() )
 {
        // Something went wrong
@@ -24,13 +24,15 @@ if ( HIH8120_OK !=  hih8120_measure() )
        // Investigate the return code further
 }
 hum = hih8120_getHumidityPercent_x10();
+_delay_ms(200);
 xSemaphoreGive(xTestSemaphore);
+
     }
 }
 
 uint16_t humimpl_getMeasurement(){
 	uint16_t returnhum;
-    if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
+    if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(2000))==pdTRUE){
 		returnhum = hum;
 		xSemaphoreGive(xTestSemaphore);
 	}
