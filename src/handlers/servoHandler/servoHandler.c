@@ -4,6 +4,7 @@
 #include "handlers/co2Handler/interface/co2Handler.h"
 #include "handlers/HumidityHandler/humidityHandler.h"
 #include <ATMEGA_FreeRTOS.h>
+#include <semphr.h>
 #include <queue.h>
 static config configuration;
 static SemaphoreHandle_t servoTestSemaphore;
@@ -89,6 +90,4 @@ void servo_measuring(void){
     
     
 }
-open(){
-	servoOpenWindow();
 }

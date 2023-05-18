@@ -20,4 +20,3 @@ void servo_set_config(uint16_t maxHumSetting,
     uint16_t maxCo2Setting,
     uint16_t minCo2Setting);
 void servo_measuring(void);
-void open();

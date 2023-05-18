@@ -138,7 +138,6 @@ void lora_handler_task( void *pvParameters )
 
 	_lora_setup();
 
-	wrapper_init();
 	
 
 	TickType_t xLastWakeTime;
@@ -179,7 +178,7 @@ void lora_handler_task( void *pvParameters )
 	   
 		}
 		
-		if(6 == downlinkPayload.len){
+		if(12 == downlinkPayload.len){
 			       maxHumSetting = (downlinkPayload.bytes[0] << 8) + downlinkPayload.bytes[1];
 			       
 			       minHumSetting = (downlinkPayload.bytes[2] << 8) + downlinkPayload.bytes[3];
