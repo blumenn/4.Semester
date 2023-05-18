@@ -1,16 +1,16 @@
 #include "fff.h"
 #include "gtest/gtest.h"
 #include <stdint.h>
-#include <hih8120.h>
 #include <semphr.h>
 
 
 
-extern "C" {
+extern "C" 
+{
 #include "../src/implementation/co2Impl/mh_z19.h"
 #include "../src/implementation/co2Impl/co2.h" 
 #include "../src/implementation/tempImpl/temperaturImpl.h"
-
+#include "../drivers/hih8120.h"
 }
 
 DEFINE_FFF_GLOBALS	
@@ -63,9 +63,9 @@ TEST_F(Co2ImplTest, TestCo2ImplMeasure) {
 DEFINE_FFF_GLOBALS	
 
 // Define fake functions
-FAKE_VOID_FUNC(hih8120_initialise, serial_comPort_t);
+FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_initialise);
 FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_measure);
-FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_getTemperature_x10, uint16_t*);
+FAKE_VALUE_FUNC(int16_t, hih8120_getTemperature_x10);
 
 class TempImplTest : public testing::Test {
 protected:
@@ -99,4 +99,4 @@ TEST_F(TempImplTest, TestTempImplMeasure) {
     tempimpl_measure();
     
     EXPECT_EQ(hih8120_measure_fake, 1);
-}
+} 
