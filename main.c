@@ -17,6 +17,7 @@
 #include <semphr.h>
 #include "src/handlers/co2Handler/interface/co2Handler.h"
 #include "src/handlers/temperturHandler/temperturHandler.h"
+#include "src/handlers/servoHandler/servoHandler.h"
 
 
 

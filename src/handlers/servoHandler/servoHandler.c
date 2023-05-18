@@ -7,6 +7,7 @@ static config configuration;
 
 void servo_handler_init(void){
 servo_init();
+return;
 }
 void servo_set_config(uint16_t maxHumSetting,
     uint16_t minHumSetting,

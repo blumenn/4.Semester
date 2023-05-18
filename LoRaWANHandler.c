@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include "src/handlers/co2Handler/interface/co2Handler.h"
 #include "./InterfaceWrapper/Wrapper.h"
-#include "../src/handlers/servoHandler/servoHandler.h"
+#include "src/handlers/servoHandler/servoHandler.h"
 
 
 #include <ATMEGA_FreeRTOS.h>
@@ -197,7 +197,6 @@ void lora_handler_task( void *pvParameters )
     minTempsetting,
     maxCo2Setting,
     minCo2Setting);
-	servo_measuring();
 		}
 				xSemaphoreGive(xTestSemaphore);
 		}
