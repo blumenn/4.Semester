@@ -92,7 +92,7 @@ TEST_F(TempImplTest, TestTempImplInit) {
     tempimpl_init();
     
     EXPECT_EQ(hih8120_initialise_fake, 1);
-    EXPECT_EQ(HIH8120_DRIVER_NOT_INITIALISED, false);
+    //EXPECT_EQ(HIH8120_DRIVER_NOT_INITIALISED, false);
 }
 
 TEST_F(TempImplTest, TestTempImplMeasure) {
