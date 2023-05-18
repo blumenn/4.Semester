@@ -1,8 +1,8 @@
 #include "servoHandler.h"
-#include "../implementation/servo/servoImpl.h"
-#include "../handlers/temperturHandler/temperturHandler.h"
-#include "../handlers/co2Handler/interface/co2Handler.h"
-#include "../handlers/HumidityHandler/humidityHandler.h"
+#include "implementation/servo/servoImpl.h"
+#include "handlers/temperturHandler/temperturHandler.h"
+#include "handlers/co2Handler/interface/co2Handler.h"
+#include "handlers/HumidityHandler/humidityHandler.h"
 static config configuration;
 
 void servo_handler_init(void){
@@ -43,16 +43,19 @@ void servo_measuring(void){
     }
     if (configuration.minCo2Setting>co2)
     {
-        return;
+        servoCloseWindow();
+		return;
     }
     if(configuration.minHumSetting> hum){
-        return;
+        servoCloseWindow();
+		return;
     }
     if (configuration.minTempsetting> temp)
     {
+		servoCloseWindow();
         return;
     }
-    servoCloseWindow();
+    
     return;
     
     
