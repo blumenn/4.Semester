@@ -63,9 +63,9 @@ TEST_F(Co2ImplTest, TestCo2ImplMeasure) {
 DEFINE_FFF_GLOBALS	
 
 // Define fake functions
-FAKE_VOID_FUNC(hih8120_initialise, serial_comPort_t);
+FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_initialise);
 FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_measure);
-FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_getTemperature_x10, uint16_t*);
+FAKE_VALUE_FUNC(int16_t, hih8120_getTemperature_x10);
 
 class TempImplTest : public testing::Test {
 protected:

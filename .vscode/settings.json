@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "atmega_freertos.h": "c"
+        "atmega_freertos.h": "c",
+        "temperaturimpl.h": "c"
     }
 }
