@@ -28,7 +28,7 @@ void servo_set_config(uint16_t maxHumSetting,
     uint16_t maxCo2Setting,
     uint16_t minCo2Setting){
          if(xSemaphoreTake(servoTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
-        {
+        
             configuration.maxHumSetting = maxHumSetting;
 configuration.minHumSetting = minHumSetting;
 configuration.maxTempSetting = maxTempSetting;
@@ -40,6 +40,7 @@ xSemaphoreGive(servoTestSemaphore);
         
 
 }
+
 void servo_measuring(void){
     if(xSemaphoreTake(servoTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
         {
