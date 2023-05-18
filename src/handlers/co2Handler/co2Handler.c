@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <ATMEGA_FreeRTOS.h>
-QueueHandle_t xQueue;
+#include <queue.h>
+extern QueueHandle_t xQueue;
 void co2_init(){
     co2impl_init();
 }
