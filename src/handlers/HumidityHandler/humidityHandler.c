@@ -1,10 +1,46 @@
 #include <stdint.h>
-//#include "./src/implementation/humidityImpl/humidityImpl.h"
-//#include "./src/handlers/HumidityHandler/interface/humidityHandler.h"
-#include "humidityHandler.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "humidityImpl.h"
+#include "sensorData.h"
 
-uint16_t hum_getMeasurement(){
-	humimpl_measure();
-    return humimpl_getMeasurement();
+TaskHandle_t humidityHandlerTaskHandle = NULL;
+
+void humidity_handler_task(void *pvParameters)
+{
+    SensorData data;
+    data.sensorName = "Humidity";
+    
+    for(;;)
+    {
+        humimpl_measure();
+        uint16_t humValue = humimpl_getMeasurement();
+
+        data.status = (humValue != 0) ? SENSOR_STATUS_OK : SENSOR_STATUS_ERROR; 
+        data.data = humValue;
+
+        xQueueSend(sensorQueue, &data, portMAX_DELAY);
+
+        vTaskDelay(pdMS_TO_TICKS(1000));  
+    }
 }
 
+void create_humidityhandler_task()
+{
+    BaseType_t taskCreated;
+    taskCreated = xTaskCreate(
+        humidity_handler_task,
+        "humidity_handler_task",
+        1000,
+        NULL,
+        1,
+        &humidityHandlerTaskHandle
+    );
+
+
+}
+
+uint16_t hum_getMeasurement()
+{
+    return humimpl_getMeasurement();
+}
