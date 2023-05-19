@@ -6,11 +6,12 @@
 
 extern "C" 
 {
-//#include "../src/implementation/co2Impl/mh_z19.h"
+#include "../src/implementation/co2Impl/mh_z19.h"
 #include "../src/implementation/co2Impl/co2.h" 
-//#include "../src/implementation/tempImpl/temperaturImpl.h"
-//#include "../src/implementation/humidityImpl/humidityImpl.h"
-//#include "../drivers/hih8120.h"
+#include "../src/implementation/tempImpl/temperaturImpl.h"
+#include "../src/implementation/humidityImpl/humidityImpl.h"
+#include "../drivers/hih8120.h"
+
 }
 
 DEFINE_FFF_GLOBALS	
@@ -41,7 +42,7 @@ TEST_F(Co2ImplTest, TestGetMeasurement) {
 	EXPECT_EQ(0, co2ppm);
 }
 
-/* 
+ 
 TEST_F(Co2ImplTest, TestCo2ImplInit) {
     co2impl_init();
     
@@ -80,6 +81,8 @@ protected:
 	}
 };
 
+
+
 TEST_F(TempImplTest, TestGetMeasurement) {
 	int temp;
 	temp = tempimpl_getMeasurement();
@@ -88,10 +91,10 @@ TEST_F(TempImplTest, TestGetMeasurement) {
 
 
 TEST_F(TempImplTest, TestTempImplInit) {
-    tempimpl_init();
+     tempimpl_init();
     
     EXPECT_EQ(hih8120_initialise_fake, 1);
-    //EXPECT_EQ(HIH8120_DRIVER_NOT_INITIALISED, false);
+    EXPECT_EQ(HIH8120_DRIVER_NOT_INITIALISED, false);
 }
 
 TEST_F(TempImplTest, TestTempImplMeasure) {
@@ -110,6 +113,7 @@ TEST_F(TempImplTest, TestTempImplMeasure) {
 
 
 
+/*
 
 // Define fake functions
 //FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_initialise);
@@ -128,6 +132,8 @@ protected:
 	}
 };
 
+
+
 TEST_F (HumImplTest, TestGetMeasurement) {
 	int Hum;
 	Hum = humimpl_getMeasurement();
@@ -139,4 +145,5 @@ TEST_F(HumImplTest, TestHumImplMeasure) {
     humimpl_measure();
     
     EXPECT_EQ(hih8120_measure_fake, 1);
-}  */
+}  
+*/

@@ -17,8 +17,8 @@ message("Current source dir: ${CMAKE_CURRENT_SOURCE_DIR}")
 
 set(SOURCES_TEST
     ../src/implementation/co2Impl/co2impl.c
-    #../src/implementation/tempImpl/temperaturImpl.c
-    #../src/implementation/humidityImpl/humidityImpl.c
+    ../src/implementation/tempImpl/temperaturImpl.c
+    ../src/implementation/humidityImpl/humidityImpl.c
     test_production.cpp
     ${SRCS})
 
@@ -28,8 +28,8 @@ include_directories(
     ../drivers
     FreeRTOS_defs
     ../src/implementation/co2Impl
-    ../scr/implementation/tempImpl
-    ../scr/implementation/humidityImpl
+    ../src/implementation/tempImpl
+    ../src/implementation/humidityImpl
     )
 
 
