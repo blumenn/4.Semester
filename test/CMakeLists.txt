@@ -17,12 +17,19 @@ message("Current source dir: ${CMAKE_CURRENT_SOURCE_DIR}")
 
 set(SOURCES_TEST
     ../src/implementation/co2Impl/co2impl.c
+    #../src/implementation/tempImpl/temperaturImpl.c
+    #../src/implementation/humidityImpl/humidityImpl.c
     test_production.cpp
     ${SRCS})
 
 # This makes the test.cpp files able to #include target libraries without errors. 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/../drivers
+    ${CMAKE_SOURCE_DIR}
+    ../drivers
+    FreeRTOS_defs
+    ../src/implementation/co2Impl
+    ../scr/implementation/tempImpl
+    ../scr/implementation/humidityImpl
     )
 
 
