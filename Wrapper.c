@@ -36,3 +36,97 @@ uint16_t hum = hum_getMeasurement();
 return _uplink_payload;
 	
 }
+
+/*
+#include <stdio.h>
+#include <stdlib.h>
+
+// Queue node structure
+typedef struct QueueNode {
+	int data;
+	struct QueueNode* next;
+} QueueNode;
+
+// Queue structure
+typedef struct Queue {
+	QueueNode* front;
+	QueueNode* rear;
+} Queue;
+
+// Function to create an empty queue
+Queue* createQueue() {
+	Queue* queue = (Queue*)malloc(sizeof(Queue));
+	queue->front = queue->rear = NULL;
+	return queue;
+}
+
+// Function to check if the queue is empty
+int isEmpty(Queue* queue) {
+	return (queue->front == NULL);
+}
+
+// Function to enqueue an element
+void enqueue(Queue* queue, int data) {
+	QueueNode* newNode = (QueueNode*)malloc(sizeof(QueueNode));
+	newNode->data = data;
+	newNode->next = NULL;
+
+	if (isEmpty(queue)) {
+		queue->front = queue->rear = newNode;
+		} else {
+		queue->rear->next = newNode;
+		queue->rear = newNode;
+	}
+
+	printf("Enqueued: %d\n", data);
+}
+
+// Function to dequeue an element
+int dequeue(Queue* queue) {
+	if (isEmpty(queue)) {
+		printf("Error: Queue is empty.\n");
+		return -1; // Assuming -1 represents an error or invalid value
+	}
+
+	QueueNode* frontNode = queue->front;
+	int data = frontNode->data;
+
+	queue->front = queue->front->next;
+	free(frontNode);
+
+	if (queue->front == NULL) {
+		queue->rear = NULL;
+	}
+
+	return data;
+}
+
+// Function to get the front element of the queue
+int front(Queue* queue) {
+	if (isEmpty(queue)) {
+		printf("Error: Queue is empty.\n");
+		return -1; // Assuming -1 represents an error or invalid value
+	}
+
+	return queue->front->data;
+}
+
+int main() {
+	Queue* queue = createQueue();
+
+	enqueue(queue, 10);
+	enqueue(queue, 20);
+	enqueue(queue, 30);
+
+	printf("Front of the queue: %d\n", front(queue));
+
+	int dequeued = dequeue(queue);
+	if (dequeued != -1) {
+		printf("Dequeued: %d\n", dequeued);
+	}
+
+	printf("Front of the queue after dequeue: %d\n", front(queue));
+
+	return 0;
+}
+*/
