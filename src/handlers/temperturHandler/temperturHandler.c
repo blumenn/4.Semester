@@ -11,7 +11,7 @@ TaskHandle_t temperatureHandlerTaskHandle = NULL;
 void temperature_handler_task(void *pvParameters)
 {
     SensorData data;
-    data.sensorName = Temperature;
+    data.sensorName =temp;
     
     for(;;)
     {

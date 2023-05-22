@@ -90,14 +90,14 @@ void saveData(SensorData data){
 	co2Sum.sum += data.data;
 	return;
 	}
-	if (data.sensorName==Humidity)
+	if (data.sensorName==hum)
 	{
 		lastData.hum = data;
 		humSum.antal +=1;
 		humSum.sum += data.data;
 		return;
 	}
-	if (data.sensorName==Temperature)
+	if (data.sensorName==temp)
 	{
 		lastData.temp = data;
 		tempSum.antal +=1;
