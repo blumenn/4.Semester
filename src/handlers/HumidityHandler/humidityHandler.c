@@ -40,7 +40,8 @@ void create_humidityhandler_task()
 
 }
 
-uint16_t hum_getMeasurement()
-{
+uint16_t hum_getMeasurement(){
+	humimpl_measure();
+    
     return humimpl_getMeasurement();
 }
