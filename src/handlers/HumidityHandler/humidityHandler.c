@@ -7,6 +7,10 @@
 extern QueueHandle_t xQueue;
 TaskHandle_t humidityHandlerTaskHandle = NULL;
 
+void humidity_Init(){
+	create_humidityhandler_task();
+}
+
 void humidity_handler_task(void *pvParameters)
 {
     SensorData data;
@@ -32,7 +36,7 @@ void create_humidityhandler_task()
     taskCreated = xTaskCreate(
         humidity_handler_task,
         "humidity_handler_task",
-        1000,
+        configMINIMAL_STACK_SIZE,
         NULL,
         1,
         &humidityHandlerTaskHandle
@@ -40,6 +44,7 @@ void create_humidityhandler_task()
 
 
 }
+
 
 uint16_t hum_getMeasurement(){
 	humimpl_measure();

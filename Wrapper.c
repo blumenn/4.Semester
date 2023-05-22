@@ -14,18 +14,17 @@ static latestData lastData;
 static measuringSum tempSum;
 static measuringSum humSum;
 static measuringSum co2Sum;
+
 void wrapper_init(){
 	_uplink_payload.len = 6;
 	_uplink_payload.portNo = 2;
 	xQueue = xQueueCreate(15,sizeof(SensorData *));
+	create_wrapper_task();
 	if (xQueue == NULL)
 	{
 		// return fejl
 		return;
 	}
-
-	
-	
 }
 
  lora_driver_payload_t wrapperhandler()
@@ -56,7 +55,6 @@ wrapper_task( ){
          saveData(data);
       }
 	 }
-	 
       return;
    }
    }
@@ -69,20 +67,18 @@ run_wrapper_task(void *pvParameters){
 
 }
 
-
 void create_wrapper_task()
 {
 	BaseType_t taskCreated;
 	taskCreated = xTaskCreate(
-	wrapper_task,
+	run_wrapper_task,
 	"wrapper_task",
-	1000,
+	configMINIMAL_STACK_SIZE,
 	NULL,
-	5,
+	2,
 	NULL
 	);
 }
-
 
 void saveData(SensorData data){
 	if(data.status==SENSOR_STATUS_OK){
@@ -108,7 +104,6 @@ void saveData(SensorData data){
 		return;
 	}
 	return;
-
 }
 
 }
