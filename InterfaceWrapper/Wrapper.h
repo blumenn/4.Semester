@@ -6,9 +6,8 @@
 #include "../src/SensorData.h"
 
 lora_driver_payload_t wrapperhandler();
-latestData get_latestData();
 
-typedef struct 
+typedef struct
 {
     SensorData temp;
     SensorData hum;
@@ -18,5 +17,8 @@ typedef struct
 
 typedef struct {
     int16_t sum;
-    int8_t antal;
+    uint8_t antal;
 } measuringSum;
+
+latestData get_latestData();
+

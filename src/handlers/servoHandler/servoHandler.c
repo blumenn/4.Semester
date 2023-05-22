@@ -44,9 +44,9 @@ void servo_measuring(void){
     if(xSemaphoreTake(servoTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
         {
     latestData data = get_latestData();
-    uint16_t temp = data.temp();
-    uint16_t hum = data.hum();
-   uint16_t co2 = data.co2();
+    uint16_t temp = data.temp.data;
+    uint16_t hum = data.hum.data;
+   uint16_t co2 = data.co2.data;
     if (configuration.maxHumSetting<hum)
     {
         servoOpenWindow();

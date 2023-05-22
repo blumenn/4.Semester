@@ -1,10 +1,11 @@
-extern QueueHandle_t xQueue;
+
 #include <stdint.h>
 #include "ATMEGA_FreeRTOS.h"
 #include "task.h"
 #include "../../src/implementation/tempImpl/temperaturImpl.h"
 #include "sensorData.h"
-
+#include <queue.h>
+extern QueueHandle_t xQueue;
 TaskHandle_t temperatureHandlerTaskHandle = NULL;
 
 void temperature_handler_task(void *pvParameters)
@@ -21,7 +22,7 @@ void temperature_handler_task(void *pvParameters)
         data.data = tempValue;
 
        
-        xQueueSend(sensorQueue, &data, portMAX_DELAY);
+        xQueueSend(xQueue, &data, portMAX_DELAY);
 
         vTaskDelay(pdMS_TO_TICKS(1000));  
         }

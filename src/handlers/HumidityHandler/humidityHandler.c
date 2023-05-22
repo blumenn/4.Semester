@@ -1,8 +1,9 @@
 #include <stdint.h>
-#include "FreeRTOS.h"
+#include <ATMEGA_FreeRTOS.h>
 #include "task.h"
-#include "humidityImpl.h"
+#include "../src/implementation/humidityImpl/humidityImpl.h"
 #include "sensorData.h"
+#include <queue.h>
 extern QueueHandle_t xQueue;
 TaskHandle_t humidityHandlerTaskHandle = NULL;
 
@@ -19,7 +20,7 @@ void humidity_handler_task(void *pvParameters)
         data.status = (humValue != 0) ? SENSOR_STATUS_OK : SENSOR_STATUS_ERROR; 
         data.data = humValue;
 
-        xQueueSend(sensorQueue, &data, portMAX_DELAY);
+        xQueueSend(xQueue, &data, portMAX_DELAY);
 
         vTaskDelay(pdMS_TO_TICKS(1000));  
     }
