@@ -52,5 +52,6 @@ void co2_init()
 
 uint16_t co2_getMeasurement()
 {
-	return co2impl_getMeasurement();
+	co2impl_measure();
+return co2impl_getMeasurement();
 }
