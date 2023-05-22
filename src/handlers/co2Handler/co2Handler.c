@@ -19,7 +19,7 @@ void create_co2handler_task()
 	taskCreated = xTaskCreate(
 	co2_handler_task,
 	"co2_handler_task",
-	1000,
+	configMINIMAL_STACK_SIZE+100,
 	NULL,
 	1,
 	&co2HandlerTaskHandle

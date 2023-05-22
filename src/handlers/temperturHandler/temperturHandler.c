@@ -34,9 +34,9 @@ void create_temperaturehandler_task()
     taskCreated = xTaskCreate(
         temperature_handler_task,
         "temperature_handler_task",
-        configMINIMAL_STACK_SIZE,
+        configMINIMAL_STACK_SIZE+100,
         NULL,
-        1,
+        2,
         &temperatureHandlerTaskHandle
     );
 

@@ -75,7 +75,7 @@ void create_wrapper_task()
 	"wrapper_task",
 	configMINIMAL_STACK_SIZE,
 	NULL,
-	2,
+	5,
 	NULL
 	);
 }
