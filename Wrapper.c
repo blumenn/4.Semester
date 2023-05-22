@@ -11,7 +11,10 @@
 
 static lora_driver_payload_t _uplink_payload;
 QueueHandle_t xQueue;
-static latestData; 
+static SensorData latestData; 
+static measuringSum tempSum;
+static measuringSum humSum;
+static measuringSum co2Sum;
 void wrapper_init(){
 	_uplink_payload.len = 6;
 	_uplink_payload.portNo = 2;
@@ -28,9 +31,9 @@ void wrapper_init(){
 
  lora_driver_payload_t wrapperhandler()
 {
-uint16_t co2_ppm = co2_getMeasurement();
-uint16_t temp = temp_getMeasurement();
-uint16_t hum = hum_getMeasurement();
+uint16_t co2_ppm = avg_x10(co2Sum);
+uint16_t temp = avg_x10(tempSum);
+uint16_t hum = avg_x10(humSum);
 
 	_uplink_payload.bytes[0] = hum >> 8;
 	_uplink_payload.bytes[1] = hum & 0xFF;
@@ -66,19 +69,30 @@ void saveData(SensorData data){
 	if (data.sensorName=="Co2Sensor")
 	{
 	latestData.CO2 = data;
+	co2Sum.antal +=1;
+	co2Sum.sum += data.data;
 	return;
 	}
 	if (data.sensorName == "Humidity")
 	{
 		latestData.hum = data;
+		humSum.antal +=1;
+		humSum.sum += data.data;
 		return;
 	}
 	if (data.sensorName == "Temperature")
 	{
 		latestData.temp = data;
+		tempSum.antal +=1;
+		tempSum.sum += data.data;
 		return;
 	}
+	return;
 
 }
+
+}
+int16_t avg_x10(measuringSum data){
+	return data.sum*10/data.antal;
 }
 
