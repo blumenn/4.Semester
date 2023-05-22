@@ -29,7 +29,7 @@ void create_co2handler_task()
 void run_co2handler_task()
 {
 	SensorData data;
-	data.sensorName = "Co2Sensor";
+	data.sensorName =Co2Sensor;
 	mh_z19_returnCode_t returnCode = co2impl_measure();
 	data.status = (returnCode == MHZ19_OK) ? SENSOR_STATUS_OK : SENSOR_STATUS_ERROR;
 	data.data = co2impl_getMeasurement();

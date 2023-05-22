@@ -6,9 +6,13 @@ typedef enum {
     SENSOR_STATUS_OK,
     SENSOR_STATUS_ERROR
 } SensorStatus;
-
+typedef enum{
+	Humidity,
+	Co2Sensor,
+	Temperature
+}MeasuringType;
 typedef struct {
-    char *sensorName;
+    MeasuringType sensorName;
     SensorStatus status;
     uint16_t data;
 } SensorData;

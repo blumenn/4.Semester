@@ -11,7 +11,7 @@ TaskHandle_t temperatureHandlerTaskHandle = NULL;
 void temperature_handler_task(void *pvParameters)
 {
     SensorData data;
-    data.sensorName = "Temperature";
+    data.sensorName = Temperature;
     
     for(;;)
     {
@@ -22,9 +22,9 @@ void temperature_handler_task(void *pvParameters)
         data.data = tempValue;
 
        
-        xQueueSend(xQueue, &data, portMAX_DELAY);
+        xQueueSend(xQueue, &data, 100);
 
-        vTaskDelay(pdMS_TO_TICKS(1000));  
+        vTaskDelay(pdMS_TO_TICKS(5000));  
         }
 }
 

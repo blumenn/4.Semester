@@ -18,7 +18,7 @@ static measuringSum co2Sum;
 void wrapper_init(){
 	_uplink_payload.len = 6;
 	_uplink_payload.portNo = 2;
-	xQueue = xQueueCreate(15,sizeof(SensorData *));
+	xQueue = xQueueCreate(15,sizeof(SensorData));
 	create_wrapper_task();
 	if (xQueue == NULL)
 	{
@@ -26,7 +26,7 @@ void wrapper_init(){
 		return;
 	}
 }
-
+SensorData data;
  lora_driver_payload_t wrapperhandler()
 {
 uint16_t co2_ppm = avg_x10(co2Sum);
@@ -43,17 +43,17 @@ return _uplink_payload;
 }
 
 wrapper_task( ){
-	SensorData data;
+	//SensorData data;
 	if( xQueue != NULL ) //checks if queue is made
    {
-     while (xQueueIsQueueEmptyFromISR(xQueue)== pdFAIL)
+     while (xQueueReceive( xQueue,&( data ),100 ) == pdPASS)
 	 {
-		if( xQueueReceive( xQueue,
-                         &( data ),
-                         ( TickType_t ) 100 ) == pdPASS )
-      {
+	//	if( xQueueReceive( xQueue,
+     //                    &( data ),
+      //                   100 ) == pdPASS )
+      //{
          saveData(data);
-      }
+      //}
 	 }
       return;
    }
@@ -82,21 +82,22 @@ void create_wrapper_task()
 
 void saveData(SensorData data){
 	if(data.status==SENSOR_STATUS_OK){
-	if (data.sensorName=="Co2Sensor")
+		
+	if (data.sensorName==Co2Sensor)
 	{
 	lastData.co2 = data;
 	co2Sum.antal +=1;
 	co2Sum.sum += data.data;
 	return;
 	}
-	if (data.sensorName == "Humidity")
+	if (data.sensorName==Humidity)
 	{
 		lastData.hum = data;
 		humSum.antal +=1;
 		humSum.sum += data.data;
 		return;
 	}
-	if (data.sensorName == "Temperature")
+	if (data.sensorName==Temperature)
 	{
 		lastData.temp = data;
 		tempSum.antal +=1;

@@ -14,7 +14,7 @@ void humidity_Init(){
 void humidity_handler_task(void *pvParameters)
 {
     SensorData data;
-    data.sensorName = "Humidity";
+    data.sensorName=Humidity;
     
     for(;;)
     {

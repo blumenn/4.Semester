@@ -41,11 +41,13 @@ xSemaphoreGive(xTestSemaphore);
     }
 }
 uint16_t tempimpl_getMeasurement(){
-	uint16_t returntemp;
+	
     if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(2000))==pdTRUE){
+		uint16_t returntemp;
 		returntemp = temp;
 		xSemaphoreGive(xTestSemaphore);
+		return returntemp;
 	}
-return returntemp;
+return 0;
 }
 
