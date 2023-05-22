@@ -42,7 +42,8 @@ uint16_t hum = avg_x10(humSum);
 	_uplink_payload.bytes[5] = co2_ppm & 0xFF;
 return _uplink_payload;	
 }
-wrapper_task(){
+
+wrapper_task( ){
 	SensorData data;
 	if( xQueue != NULL ) //checks if queue is made
    {
@@ -52,14 +53,34 @@ wrapper_task(){
                          &( data ),
                          ( TickType_t ) 100 ) == pdPASS )
       {
-
          saveData(data);
-		 
       }
 	 }
 	 
-      
+      return;
    }
+   }
+
+run_wrapper_task(void *pvParameters){
+	for(;;){
+		wrapper_task();
+		vTaskDelay(pdMS_TO_TICKS(1000));
+	}
+
+}
+
+
+void create_wrapper_task()
+{
+	BaseType_t taskCreated;
+	taskCreated = xTaskCreate(
+	wrapper_task,
+	"wrapper_task",
+	1000,
+	NULL,
+	5,
+	NULL
+	);
 }
 
 

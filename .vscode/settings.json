@@ -6,6 +6,9 @@
         "chrono": "c",
         "limits": "c",
         "servoimpl.h": "c",
-        "xutility": "c"
+        "xutility": "c",
+        "array": "c",
+        "vector": "c",
+        "xstring": "c"
     }
 }
