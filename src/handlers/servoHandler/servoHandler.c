@@ -1,8 +1,6 @@
 #include "servoHandler.h"
+#include "../InterfaceWrapper/Wrapper.h"
 #include "implementation/servo/servoImpl.h"
-#include "handlers/temperturHandler/temperturHandler.h"
-#include "handlers/co2Handler/interface/co2Handler.h"
-#include "handlers/HumidityHandler/humidityHandler.h"
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
 #include <queue.h>
@@ -45,9 +43,10 @@ xSemaphoreGive(servoTestSemaphore);
 void servo_measuring(void){
     if(xSemaphoreTake(servoTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
         {
-    uint16_t temp = temp_getMeasurement();
-    uint16_t hum = hum_getMeasurement();
-   uint16_t co2 = co2_getMeasurement();
+    latestData data = get_latestData();
+    uint16_t temp = data.temp();
+    uint16_t hum = data.hum();
+   uint16_t co2 = data.co2();
     if (configuration.maxHumSetting<hum)
     {
         servoOpenWindow();
