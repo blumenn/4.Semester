@@ -71,10 +71,12 @@ void saveData(SensorData data){
 	if (data.sensorName == "Humidity")
 	{
 		latestData.hum = data;
+		return;
 	}
 	if (data.sensorName == "Temperature")
 	{
 		latestData.temp = data;
+		return;
 	}
 
 }
