@@ -102,3 +102,6 @@ int16_t avg_x10(measuringSum data) {
 latestData get_latestData(){
 	return latestData;
 }
+
+
+
