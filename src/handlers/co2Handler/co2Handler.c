@@ -7,7 +7,7 @@
 #include "mh_z19.h"
 #include "task.h"
 
-// Forward declaration of co2_handler_task
+
 void co2_handler_task(void *pvParameters);
 
 TaskHandle_t co2HandlerTaskHandle = NULL;
