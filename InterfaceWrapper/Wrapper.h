@@ -12,3 +12,10 @@ typedef struct {
     SensorStatus status;
     uint16_t data;
 } SensorData;
+
+typedef struct
+{
+    SensorData temp;
+    SensorData hum;
+    SensorData CO2;
+} latestData;
