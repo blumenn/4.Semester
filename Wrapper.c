@@ -51,7 +51,7 @@ wrapper_task(){
 	 {
 		if( xQueueReceive( xQueue,
                          &( data ),
-                         ( TickType_t ) 10 ) == pdPASS )
+                         ( TickType_t ) 100 ) == pdPASS )
       {
 
          saveData(data);
@@ -92,8 +92,11 @@ void saveData(SensorData data){
 }
 
 }
-int16_t avg_x10(measuringSum data){
-	return data.sum*10/data.antal;
+int16_t avg_x10(measuringSum data) {
+	int16_t result= data.sum*10/data.antal;
+	data.antal=0;
+	data.sum = 0;
+	return result;
 }
 
 latestData get_latestData(){
