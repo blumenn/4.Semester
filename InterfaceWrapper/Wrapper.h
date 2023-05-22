@@ -7,3 +7,7 @@
 
 lora_driver_payload_t wrapperhandler();
 
+typedef struct {
+    int16_t sum;
+    int8_t antal;
+} measuringSum;
