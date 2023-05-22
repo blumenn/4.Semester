@@ -11,7 +11,7 @@
 
 static lora_driver_payload_t _uplink_payload;
 QueueHandle_t xQueue;
-static SensorData latestData; 
+static latestData latestData; 
 static measuringSum tempSum;
 static measuringSum humSum;
 static measuringSum co2Sum;
@@ -68,7 +68,7 @@ void saveData(SensorData data){
 	if(data.status==SENSOR_STATUS_OK){
 	if (data.sensorName=="Co2Sensor")
 	{
-	latestData.CO2 = data;
+	latestData.co2 = data;
 	co2Sum.antal +=1;
 	co2Sum.sum += data.data;
 	return;
@@ -96,3 +96,6 @@ int16_t avg_x10(measuringSum data){
 	return data.sum*10/data.antal;
 }
 
+latestData get_latestData(){
+	return latestData;
+}
