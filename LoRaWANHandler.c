@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include "src/handlers/co2Handler/interface/co2Handler.h"
 #include "./InterfaceWrapper/Wrapper.h"
-
+#include "src/handlers/servoHandler/servoHandler.h"
 
 
 #include <ATMEGA_FreeRTOS.h>
@@ -30,7 +30,7 @@ extern lora_driver_payload_t downlinkPayload;
 extern MessageBufferHandle_t downLinkMessageBufferHandle;
 
 uint16_t maxHumSetting; // Max Humidity
-int16_t maxTempSetting; // Max Temperature
+uint16_t maxTempSetting; // Max Temperature
 uint16_t minHumSetting;
 
 uint16_t minTempsetting;
@@ -139,7 +139,6 @@ void lora_handler_task( void *pvParameters )
 	_lora_setup();
 
 	wrapper_init();
-	
 
 	TickType_t xLastWakeTime;
 	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
@@ -152,8 +151,8 @@ void lora_handler_task( void *pvParameters )
 	for(;;)
 	{
 		display_7seg_powerUp();
-		maxHumSetting =1+maxHumSetting;
-		display_7seg_display((float)maxHumSetting, 1);
+// 		maxHumSetting =1+maxHumSetting;
+// 		/display_7seg_display((float)maxHumSetting, 1);
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 		
 		_uplink_payload = wrapperhandler();
@@ -179,7 +178,7 @@ void lora_handler_task( void *pvParameters )
 	   
 		}
 		
-		if(6 == downlinkPayload.len){
+		if(12 == downlinkPayload.len){
 			       maxHumSetting = (downlinkPayload.bytes[0] << 8) + downlinkPayload.bytes[1];
 			       
 			       minHumSetting = (downlinkPayload.bytes[2] << 8) + downlinkPayload.bytes[3];
@@ -191,7 +190,12 @@ void lora_handler_task( void *pvParameters )
 				   maxCo2Setting = (downlinkPayload.bytes[8] << 8) + downlinkPayload.bytes[9];
 				   
 				   minCo2Setting = (downlinkPayload.bytes[10] << 8) + downlinkPayload.bytes[11];
-				   
+				  servo_set_config(maxHumSetting,
+    minHumSetting,
+    maxTempSetting,
+    minTempsetting,
+    maxCo2Setting,
+    minCo2Setting);
 		}
 				xSemaphoreGive(xTestSemaphore);
 		}
