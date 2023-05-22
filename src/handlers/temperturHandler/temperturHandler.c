@@ -46,7 +46,9 @@ void temp_init()
     create_temperaturehandler_task();
 }
 
-uint16_t temp_getMeasurement()
-{
-    return tempimpl_getMeasurement();
+uint16_t temp_getMeasurement(){
+    
+tempimpl_measure();
+
+return tempimpl_getMeasurement();
 }
