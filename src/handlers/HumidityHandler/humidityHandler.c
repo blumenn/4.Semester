@@ -26,7 +26,7 @@ void humidity_handler_task(void *pvParameters)
 
         xQueueSend(xQueue, &data, 10);
 
-        vTaskDelay(pdMS_TO_TICKS(1000));  
+        vTaskDelay(pdMS_TO_TICKS(5000));  
     }
 }
 

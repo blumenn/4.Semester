@@ -91,23 +91,22 @@ void servo_measuring(){
         xSemaphoreGive(servoTestSemaphore);
         return ;
     }
-    if (configuration.minCo2Setting>co2)
+    if (configuration.minCo2Setting<co2)
     {
-        servoCloseWindow();
+        
         xSemaphoreGive(servoTestSemaphore);
 		return;
     }
-    if(configuration.minHumSetting> hum){
-        servoCloseWindow();
+    if(configuration.minHumSetting< hum){
         xSemaphoreGive(servoTestSemaphore);
 		return;
     }
-    if (configuration.minTempsetting> temp)
+    if (configuration.minTempsetting< temp)
     {
         xSemaphoreGive(servoTestSemaphore);
-		servoCloseWindow();
         return;
     }
+    servoCloseWindow();
     xSemaphoreGive(servoTestSemaphore);
         }
     return;

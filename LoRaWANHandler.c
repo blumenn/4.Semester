@@ -155,8 +155,8 @@ void lora_handler_task( void *pvParameters )
 		
 		_uplink_payload = wrapperhandler();
 		
-		if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE)
-		{
+		//if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE)
+		//{
 		// Some dummy payload
 		
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
@@ -195,8 +195,8 @@ void lora_handler_task( void *pvParameters )
     maxCo2Setting,
     minCo2Setting);
 		}
-				xSemaphoreGive(xTestSemaphore);
-		}
+		//		xSemaphoreGive(xTestSemaphore);
+		//}
 	
 		
 	}
