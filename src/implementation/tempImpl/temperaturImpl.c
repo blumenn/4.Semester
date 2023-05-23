@@ -1,5 +1,5 @@
 #include "temperaturimpl.h"
-//#include <util/delay.h>
+#include "delay_hal.h"
 #include <ATMEGA_FreeRTOS.h>
 #include <stdint.h>
 #include <hih8120.h>
@@ -28,7 +28,7 @@ void tempimpl_measure(){
        // Something went wrong
        // Investigate the return code further
 }
-//_delay_ms(1000);
+ delay_hal(1000);
 if ( HIH8120_OK !=  hih8120_measure() )
 {
        // Something went wrong

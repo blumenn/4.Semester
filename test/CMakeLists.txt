@@ -18,8 +18,9 @@ message("Current source dir: ${CMAKE_CURRENT_SOURCE_DIR}")
 set(SOURCES_TEST
     ../src/implementation/co2Impl/co2impl.c
     ../src/implementation/tempImpl/temperaturImpl.c
-    ../src/implementation/humidityImpl/humidityImpl.c
+  # ../src/implementation/humidityImpl/humidityImpl.c
     test_production.cpp
+    FreeRTOS_defs/FreeRTOS_FFF_MocksDefinitions.cpp
     ${SRCS})
 
 # This makes the test.cpp files able to #include target libraries without errors. 
@@ -29,7 +30,9 @@ include_directories(
     FreeRTOS_defs
     ../src/implementation/co2Impl
     ../src/implementation/tempImpl
-    ../src/implementation/humidityImpl
+    ../src/implementation/tempImpl/delay_hal
+
+   # ../src/implementation/humidityImpl
     )
 
 

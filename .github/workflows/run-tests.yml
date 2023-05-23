@@ -2,9 +2,9 @@ name: CMake
 
 on:
   push:
-    branches: [ "folderRefactoringBranch" ]
+    branches: [ "dev", "master" ]
   pull_request:
-    branches: [ "folderRefactoringBranch" ]
+    branches: [ "dev", "master" ]
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
