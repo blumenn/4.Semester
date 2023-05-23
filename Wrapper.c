@@ -29,9 +29,9 @@ void wrapper_init(){
 SensorData data;
  lora_driver_payload_t wrapperhandler()
 {
-uint16_t co2_ppm = avg_x10(co2Sum);
-uint16_t temp = avg_x10(tempSum);
-uint16_t hum = avg_x10(humSum);
+uint16_t co2_ppm = avg(&co2Sum);
+uint16_t temp = avg(&tempSum);
+uint16_t hum = avg(&humSum);
 
 	_uplink_payload.bytes[0] = hum >> 8;
 	_uplink_payload.bytes[1] = hum & 0xFF;
@@ -108,10 +108,10 @@ void saveData(SensorData data){
 }
 
 }
-int16_t avg_x10(measuringSum data) {
-	int16_t result= data.sum*10/data.antal;
-	data.antal=0;
-	data.sum = 0;
+int16_t avg(measuringSum *data) {
+	int16_t result= data->sum/data->antal;
+	data->antal=0;
+	data->sum = 0;
 	return result;
 }
 
