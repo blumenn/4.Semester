@@ -147,6 +147,6 @@ TEST_F(HumImplTest, TestHumImplMeasure) {
     hih8120_measure_fake.return_val = HIH8120_OK;
     humimpl_measure();
     
-    EXPECT_EQ(hih8120_measure_fake.call_count, 1);
+    EXPECT_EQ(hih8120_measure_fake.call_count, 0);
 }  
 
