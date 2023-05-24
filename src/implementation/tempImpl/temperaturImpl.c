@@ -38,7 +38,7 @@ if ( HIH8120_OK !=  hih8120_measure() )
        // Investigate the return code further
 }
 temp = hih8120_getTemperature_x10();
-_delay_ms(200);
+delay_hal(200);
 xSemaphoreGive(xTestSemaphore);
 }
 }
