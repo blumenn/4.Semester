@@ -60,11 +60,6 @@ TEST_F(Co2ImplTest, TestCo2ImplMeasure) {
 }
 
 
-
-
-
-
-
 // Define fake functions
 FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_initialise);
 FAKE_VOID_FUNC(delay_hal, uint16_t);
@@ -79,35 +74,44 @@ protected:
         RESET_FAKE(hih8120_initialise);
         RESET_FAKE(hih8120_measure);
         RESET_FAKE(hih8120_getTemperature_x10);
+        xTestSemaphore = xSemaphoreCreateMutex();
+        xSemaphoreGive(xTestSemaphore);
     }
     void TearDown() override {
+         vSemaphoreDelete(xTestSemaphore);
 
 	}
 };
 
 
-
 TEST_F(TempImplTest, TestGetMeasurement) {
-	uint16_t temp;
-	temp = tempimpl_getMeasurement();
-	EXPECT_EQ(0, temp);
+   uint16_t temp = 0; 
+   uint16_t result = tempimpl_getMeasurement();
+   EXPECT_EQ(temp, result);
 }
 
-/*
+
 TEST_F(TempImplTest, TestTempImplInit) {
      tempimpl_init();
     
     EXPECT_EQ(hih8120_initialise_fake.call_count, 1);
-    EXPECT_EQ(HIH8120_DRIVER_NOT_INITIALISED, false);
+    EXPECT_EQ(HIH8120_DRIVER_NOT_INITIALISED, 2); //her er det 2, fordi DRIVER_NOT_INITIALISED er 2. "værdi" i return hih8120_driverReturnCode_t enum. 
 }
 
 TEST_F(TempImplTest, TestTempImplMeasure) {
+   
     hih8120_measure_fake.return_val = HIH8120_OK;
+    xSemaphoreTake_fake.return_val = pdTRUE;  
+    hih8120_wakeup_fake.return_val = HIH8120_OK;
     tempimpl_measure();
     
     EXPECT_EQ(hih8120_measure_fake.call_count, 1);
-} 
-*/
+    EXPECT_EQ(xSemaphoreTake_fake.call_count, 2);
+    EXPECT_EQ(hih8120_wakeup_fake.call_count, 1);
+    EXPECT_EQ(xSemaphoreGive_fake.call_count,4);
+    
+}
+
 
 
 
@@ -128,8 +132,11 @@ protected:
         // Resets the fake functions
         RESET_FAKE(hih8120_measure);
         RESET_FAKE(hih8120_getHumidityPercent_x10);
+        xTestSemaphore = xSemaphoreCreateMutex();
+        xSemaphoreGive(xTestSemaphore);
     }
     void TearDown() override {
+         vSemaphoreDelete(xTestSemaphore);
 
 	}
 };
@@ -137,15 +144,18 @@ protected:
 
 
 TEST_F (HumImplTest, TestGetMeasurement) {
-	int Hum;
-	Hum = humimpl_getMeasurement();
-	EXPECT_EQ(0, Hum);
+	hih8120_getHumidityPercent_x10_fake.return_val = 0;
+    humimpl_measure();
+    uint16_t hum;
+    hum = humimpl_getMeasurement();
+    EXPECT_EQ(0, hum);
 }
 
 TEST_F(HumImplTest, TestHumImplMeasure) {
     hih8120_measure_fake.return_val = HIH8120_OK;
     humimpl_measure();
     
-    EXPECT_EQ(hih8120_measure_fake, 1);
+    EXPECT_EQ(hih8120_measure_fake.call_count, 1);
 }  
+
 */

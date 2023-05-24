@@ -10,7 +10,7 @@
 
 
 
-static uint16_t temp;
+static uint16_t temp = 0;
 extern SemaphoreHandle_t xTestSemaphore;
 
 
@@ -39,7 +39,7 @@ xSemaphoreGive(xTestSemaphore);
     }
 }
 uint16_t tempimpl_getMeasurement(){
-	uint16_t returntemp;
+	uint16_t returntemp = 0;
     if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
 		returntemp = temp;
 		xSemaphoreGive(xTestSemaphore);
