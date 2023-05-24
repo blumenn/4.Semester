@@ -1,6 +1,6 @@
 #include <stddef.h>
 #include "co2.h"
-#include "mh_z19.h"
+
 #include "serial.h"
 #include <stdio.h>
 uint16_t ppm;
@@ -17,7 +17,7 @@ void co2impl_init(){
 }
 
 
-void co2impl_measure()
+mh_z19_returnCode_t co2impl_measure()
 {
 	mh_z19_returnCode_t returnCode = mh_z19_takeMeassuring();
 	
@@ -25,6 +25,7 @@ void co2impl_measure()
 	{
 		printf("CO2HardwareERROR: %d\n", returnCode);
 	}
+	return returnCode;
 }
 
 

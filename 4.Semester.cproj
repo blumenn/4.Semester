@@ -341,6 +341,9 @@
     <Compile Include="src\implementation\tempImpl\temperaturimpl.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\SensorData.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Wrapper.c">
       <SubType>compile</SubType>
     </Compile>

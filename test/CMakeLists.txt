@@ -22,7 +22,8 @@ set(SOURCES_TEST
 
 # This makes the test.cpp files able to #include target libraries without errors. 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/../drivers
+    ${CMAKE_SOURCE_DIR}
+    ../drivers
     )
 
 

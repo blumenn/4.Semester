@@ -1,3 +1,4 @@
+
 #include <stdint.h>
 #include "ATMEGA_FreeRTOS.h"
 #include "task.h"
@@ -7,6 +8,40 @@
 #include <queue.h>
 
 extern QueueHandle_t xQueue;
+TaskHandle_t temperatureHandlerTaskHandle = NULL;
+
+void temperature_handler_task(void *pvParameters)
+{
+    SensorData data;
+    data.sensorName = "Temperature";
+    
+    for(;;)
+    {
+        tempimpl_measure();
+        uint16_t tempValue = tempimpl_getMeasurement();
+
+        data.status = (tempValue != 0) ? SENSOR_STATUS_OK : SENSOR_STATUS_ERROR;
+        data.data = tempValue;
+
+       
+        xQueueSend(xQueue, &data, portMAX_DELAY);
+
+        vTaskDelay(pdMS_TO_TICKS(1000));  
+        }
+}
+
+void create_temperaturehandler_task()
+{
+    BaseType_t taskCreated;
+    taskCreated = xTaskCreate(
+        temperature_handler_task,
+        "temperature_handler_task",
+        configMINIMAL_STACK_SIZE+100,
+        NULL,
+        2,
+        &temperatureHandlerTaskHandle
+    );
+}
 
 TaskHandle_t temperatureHandlerTaskHandle = NULL;
 
@@ -30,20 +65,6 @@ void temperature_handler_task(void *pvParameters)
         }
 }
 
-void create_temperaturehandler_task()
-{
-    BaseType_t taskCreated;
-    taskCreated = xTaskCreate(
-        temperature_handler_task,
-        "temperature_handler_task",
-        1000,
-        NULL,
-        1,
-        &temperatureHandlerTaskHandle
-    );
-
-
-}
 
 void temp_init()
 {

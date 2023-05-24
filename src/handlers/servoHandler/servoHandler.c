@@ -1,8 +1,6 @@
 #include "servoHandler.h"
+#include "../InterfaceWrapper/Wrapper.h"
 #include "implementation/servo/servoImpl.h"
-#include "handlers/temperturHandler/temperturHandler.h"
-#include "handlers/co2Handler/interface/co2Handler.h"
-#include "handlers/HumidityHandler/humidityHandler.h"
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
 #include <queue.h>
@@ -20,6 +18,7 @@ servo_init();
 			xSemaphoreGive( ( servoTestSemaphore ) );  // Make the mutex available for use, by initially "Giving" the Semaphore.
 		}
 	}
+
 return;
 }
 void servo_set_config(uint16_t maxHumSetting,
@@ -38,16 +37,37 @@ configuration.maxCo2Setting = maxCo2Setting;
 configuration.minCo2Setting = minCo2Setting;
 xSemaphoreGive(servoTestSemaphore);
         }
-        
-
 }
+
+void create_servo_handler_task()
+{
+    BaseType_t taskCreated;
+    taskCreated = xTaskCreate(
+    servo_handler_task,
+    "servo_handler_task",
+    configMINIMAL_STACK_SIZE+100,
+    NULL,
+    5,
+    &servoHandlerTaskHandle
+    );
+}
+
+void run_servo_handler_task()
+{
+    for (;;){
+        servo_measuring();
+        vTaskDelay(pdMS_TO_TICKS(10000));
+    }
+}
+
 
 void servo_measuring(void){
     if(xSemaphoreTake(servoTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
         {
-    uint16_t temp = temp_getMeasurement();
-    uint16_t hum = hum_getMeasurement();
-   uint16_t co2 = co2_getMeasurement();
+    latestData data = get_latestData();
+    uint16_t temp = data.temp.data;
+    uint16_t hum = data.hum.data;
+   uint16_t co2 = data.co2.data;
     if (configuration.maxHumSetting<hum)
     {
         servoOpenWindow();

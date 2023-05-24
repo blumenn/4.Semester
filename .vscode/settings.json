@@ -5,6 +5,10 @@
         "algorithm": "c",
         "chrono": "c",
         "limits": "c",
-        "servoimpl.h": "c"
+        "servoimpl.h": "c",
+        "xutility": "c",
+        "array": "c",
+        "vector": "c",
+        "xstring": "c"
     }
 }
