@@ -8,8 +8,30 @@ static config configuration;
 static SemaphoreHandle_t servoTestSemaphore;
 extern QueueHandle_t xQueue;
 
+void run_servo_handler_task(void *pvParameters)
+{
+	for (;;){
+		servo_measuring();
+		vTaskDelay(pdMS_TO_TICKS(10000));
+	}
+}
+
+void create_servo_handler_task()
+{
+	BaseType_t taskCreated;
+	taskCreated = xTaskCreate(
+	run_servo_handler_task,
+	"servo_handler_task",
+	configMINIMAL_STACK_SIZE+100,
+	NULL,
+	5,
+	NULL
+	);
+}
+
 void servo_handler_init(void){
 servo_init();
+create_servo_handler_task();
 	if ( servoTestSemaphore == NULL )  // Check to confirm that the Semaphore has not already been created.
 	{
 		servoTestSemaphore = xSemaphoreCreateMutex();  // Create a mutex semaphore.
@@ -39,29 +61,12 @@ xSemaphoreGive(servoTestSemaphore);
         }
 }
 
-void create_servo_handler_task()
-{
-    BaseType_t taskCreated;
-    taskCreated = xTaskCreate(
-    servo_handler_task,
-    "servo_handler_task",
-    configMINIMAL_STACK_SIZE+100,
-    NULL,
-    5,
-    &servoHandlerTaskHandle
-    );
-}
-
-void run_servo_handler_task()
-{
-    for (;;){
-        servo_measuring();
-        vTaskDelay(pdMS_TO_TICKS(10000));
-    }
-}
 
 
-void servo_measuring(void){
+
+
+
+void servo_measuring(){
     if(xSemaphoreTake(servoTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
         {
     latestData data = get_latestData();
@@ -86,23 +91,22 @@ void servo_measuring(void){
         xSemaphoreGive(servoTestSemaphore);
         return ;
     }
-    if (configuration.minCo2Setting>co2)
+    if (configuration.minCo2Setting<co2)
     {
-        servoCloseWindow();
+        
         xSemaphoreGive(servoTestSemaphore);
 		return;
     }
-    if(configuration.minHumSetting> hum){
-        servoCloseWindow();
+    if(configuration.minHumSetting< hum){
         xSemaphoreGive(servoTestSemaphore);
 		return;
     }
-    if (configuration.minTempsetting> temp)
+    if (configuration.minTempsetting< temp)
     {
         xSemaphoreGive(servoTestSemaphore);
-		servoCloseWindow();
         return;
     }
+    servoCloseWindow();
     xSemaphoreGive(servoTestSemaphore);
         }
     return;

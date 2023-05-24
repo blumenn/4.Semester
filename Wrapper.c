@@ -14,12 +14,21 @@ static latestData lastData;
 static measuringSum tempSum;
 static measuringSum humSum;
 static measuringSum co2Sum;
+static SemaphoreHandle_t servoWrapperSemaphore=NULL;
 
 void wrapper_init(){
 	_uplink_payload.len = 6;
 	_uplink_payload.portNo = 2;
-	xQueue = xQueueCreate(15,sizeof(SensorData *));
+	xQueue = xQueueCreate(15,sizeof(SensorData));
 	create_wrapper_task();
+	if ( servoWrapperSemaphore == NULL )  // Check to confirm that the Semaphore has not already been created.
+	{
+		servoWrapperSemaphore = xSemaphoreCreateMutex();  // Create a mutex semaphore.
+		if ( ( servoWrapperSemaphore ) != NULL )
+		{
+			xSemaphoreGive( ( servoWrapperSemaphore ) );  // Make the mutex available for use, by initially "Giving" the Semaphore.
+		}
+	}
 	if (xQueue == NULL)
 	{
 		// return fejl
@@ -29,9 +38,9 @@ void wrapper_init(){
 
  lora_driver_payload_t wrapperhandler()
 {
-uint16_t co2_ppm = avg_x10(co2Sum);
-uint16_t temp = avg_x10(tempSum);
-uint16_t hum = avg_x10(humSum);
+uint16_t co2_ppm = avg(&co2Sum);
+uint16_t temp = avg(&tempSum);
+uint16_t hum = avg(&humSum);
 
 	_uplink_payload.bytes[0] = hum >> 8;
 	_uplink_payload.bytes[1] = hum & 0xFF;
@@ -46,14 +55,14 @@ wrapper_task( ){
 	SensorData data;
 	if( xQueue != NULL ) //checks if queue is made
    {
-     while (xQueueIsQueueEmptyFromISR(xQueue)== pdFAIL)
+     while (xQueueReceive( xQueue,&( data ),100 ) == pdPASS)
 	 {
-		if( xQueueReceive( xQueue,
-                         &( data ),
-                         ( TickType_t ) 100 ) == pdPASS )
-      {
+	//	if( xQueueReceive( xQueue,
+     //                    &( data ),
+      //                   100 ) == pdPASS )
+      //{
          saveData(data);
-      }
+      //}
 	 }
       return;
    }
@@ -81,37 +90,53 @@ void create_wrapper_task()
 }
 
 void saveData(SensorData data){
+	if (xSemaphoreTake(servoWrapperSemaphore,pdMS_TO_TICKS(2000))==pdTRUE)
+	{
+		
+	
 	if(data.status==SENSOR_STATUS_OK){
-	if (data.sensorName=="Co2Sensor")
+		
+	if (data.sensorName==Co2Sensor)
 	{
 	lastData.co2 = data;
 	co2Sum.antal +=1;
 	co2Sum.sum += data.data;
+	xSemaphoreGive(servoWrapperSemaphore);
 	return;
 	}
-	if (data.sensorName == "Humidity")
+	if (data.sensorName==hum)
 	{
 		lastData.hum = data;
 		humSum.antal +=1;
 		humSum.sum += data.data;
+		xSemaphoreGive(servoWrapperSemaphore);
 		return;
 	}
-	if (data.sensorName == "Temperature")
+	if (data.sensorName==temp)
 	{
 		lastData.temp = data;
 		tempSum.antal +=1;
 		tempSum.sum += data.data;
+		xSemaphoreGive(servoWrapperSemaphore);
 		return;
 	}
+	xSemaphoreGive(servoWrapperSemaphore);
 	return;
+	
+	}
 }
 
 }
-int16_t avg_x10(measuringSum data) {
-	int16_t result= data.sum*10/data.antal;
-	data.antal=0;
-	data.sum = 0;
+int16_t avg(measuringSum *data) {
+		if (xSemaphoreTake(servoWrapperSemaphore,pdMS_TO_TICKS(2000))==pdTRUE)
+	{
+	int16_t result= data->sum/data->antal;
+	data->antal=0;
+	data->sum = 0;
+	xSemaphoreGive(servoWrapperSemaphore);
 	return result;
+	}
+	return 0;
 }
 
 latestData get_latestData(){

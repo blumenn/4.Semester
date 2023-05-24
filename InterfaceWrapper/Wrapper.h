@@ -16,7 +16,7 @@ typedef struct
 
 
 typedef struct {
-    int16_t sum;
+    uint16_t sum;
     uint8_t antal;
 } measuringSum;
 

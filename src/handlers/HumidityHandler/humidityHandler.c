@@ -16,19 +16,19 @@ void humidity_Init(){
 void humidity_handler_task(void *pvParameters)
 {
     SensorData data;
-    data.sensorName = "Humidity";
+    
     
     for(;;)
     {
         humimpl_measure();
         uint16_t humValue = humimpl_getMeasurement();
-
+		data.sensorName = hum;
         data.status = (humValue != 0) ? SENSOR_STATUS_OK : SENSOR_STATUS_ERROR; 
         data.data = humValue;
 
-        xQueueSend(xQueue, &data, portMAX_DELAY);
+        xQueueSend(xQueue, &data, 10);
 
-        vTaskDelay(pdMS_TO_TICKS(1000));  
+        vTaskDelay(pdMS_TO_TICKS(5000));  
     }
 }
 
