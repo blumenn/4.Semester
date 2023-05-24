@@ -12,7 +12,7 @@ extern "C"
 #include "../src/implementation/tempImpl/temperaturImpl.h"
 #include "../src/implementation/humidityImpl/humidityImpl.h"
 #include "../src/implementation/tempImpl/delay_hal/delay_hal.h"
-#include "../drivers/hih8120.h"
+#include "hih8120.h"
 SemaphoreHandle_t xTestSemaphore;
 }
 
