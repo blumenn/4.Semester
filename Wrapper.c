@@ -9,10 +9,16 @@
 #include <status_leds.h>
 
 static lora_driver_payload_t _uplink_payload;
-
+QueueHandle_t xQueue;
 void wrapper_init(){
 	_uplink_payload.len = 6;
 	_uplink_payload.portNo = 2;
+	xQueue;
+	if (xQueue != NULL)
+	{
+		return;
+	}
+	
 }
 
  lora_driver_payload_t wrapperhandler()
