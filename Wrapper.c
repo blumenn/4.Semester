@@ -14,19 +14,28 @@ static latestData lastData;
 static measuringSum tempSum;
 static measuringSum humSum;
 static measuringSum co2Sum;
+static SemaphoreHandle_t servoWrapperSemaphore 
 
 void wrapper_init(){
 	_uplink_payload.len = 6;
 	_uplink_payload.portNo = 2;
 	xQueue = xQueueCreate(15,sizeof(SensorData));
 	create_wrapper_task();
+	if ( servoWrapperSemaphore == NULL )  // Check to confirm that the Semaphore has not already been created.
+	{
+		servoWrapperSemaphore = xSemaphoreCreateMutex();  // Create a mutex semaphore.
+		if ( ( servoWrapperSemaphore ) != NULL )
+		{
+			xSemaphoreGive( ( servoWrapperSemaphore ) );  // Make the mutex available for use, by initially "Giving" the Semaphore.
+		}
+	}
 	if (xQueue == NULL)
 	{
 		// return fejl
 		return;
 	}
 }
-SensorData data;
+
  lora_driver_payload_t wrapperhandler()
 {
 uint16_t co2_ppm = avg(&co2Sum);
@@ -43,7 +52,7 @@ return _uplink_payload;
 }
 
 wrapper_task( ){
-	//SensorData data;
+	SensorData data;
 	if( xQueue != NULL ) //checks if queue is made
    {
      while (xQueueReceive( xQueue,&( data ),100 ) == pdPASS)
@@ -81,6 +90,10 @@ void create_wrapper_task()
 }
 
 void saveData(SensorData data){
+	if (xSemaphoreTake(servoWrapperSemaphore,pdMS_TO_TICKS(2000))==pdTRUE)
+	{
+		
+	
 	if(data.status==SENSOR_STATUS_OK){
 		
 	if (data.sensorName==Co2Sensor)
@@ -88,6 +101,7 @@ void saveData(SensorData data){
 	lastData.co2 = data;
 	co2Sum.antal +=1;
 	co2Sum.sum += data.data;
+	xSemaphoreGive(servoWrapperSemaphore);
 	return;
 	}
 	if (data.sensorName==hum)
@@ -95,6 +109,7 @@ void saveData(SensorData data){
 		lastData.hum = data;
 		humSum.antal +=1;
 		humSum.sum += data.data;
+		xSemaphoreGive(servoWrapperSemaphore);
 		return;
 	}
 	if (data.sensorName==temp)
@@ -102,16 +117,24 @@ void saveData(SensorData data){
 		lastData.temp = data;
 		tempSum.antal +=1;
 		tempSum.sum += data.data;
+		xSemaphoreGive(servoWrapperSemaphore);
 		return;
 	}
+	xSemaphoreGive(servoWrapperSemaphore);
 	return;
+	
+	}
 }
 
 }
 int16_t avg(measuringSum *data) {
+		if (xSemaphoreTake(servoWrapperSemaphore,pdMS_TO_TICKS(2000))==pdTRUE)
+	{
 	int16_t result= data->sum/data->antal;
 	data->antal=0;
 	data->sum = 0;
+	xSemaphoreGive(servoWrapperSemaphore);
+	}
 	return result;
 }
 
