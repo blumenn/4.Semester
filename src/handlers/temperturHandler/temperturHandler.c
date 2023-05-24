@@ -1,8 +1,9 @@
 #include "temperturHandler.h"
-
-
+#include <ATMEGA_FreeRTOS.h>
 #include <stdint.h>
-
+#include <queue.h>
+#include "../src/implementation/tempImpl/temperaturImpl.h"
+extern QueueHandle_t xQueue;
 
 void temp_init(){
     tempimpl_init();
@@ -10,8 +11,10 @@ void temp_init(){
 
 
 uint16_t temp_getMeasurement(){
+    
 tempimpl_measure();
-tempimpl_getMeasurement();
+
+return tempimpl_getMeasurement();
 }
 
 

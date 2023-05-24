@@ -12,7 +12,9 @@
 
 static uint16_t temp = 0;
 extern SemaphoreHandle_t xTestSemaphore;
-
+void doNothing(){
+	return;
+}
 
 void tempimpl_init(){
      if ( HIH8120_OK == hih8120_initialise() )
@@ -22,7 +24,7 @@ void tempimpl_init(){
 }
 }
 void tempimpl_measure(){
-    if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
+    if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(2000))==pdTRUE){
     if ( HIH8120_OK != hih8120_wakeup() )
 {
        // Something went wrong
@@ -35,9 +37,10 @@ if ( HIH8120_OK !=  hih8120_measure() )
        // Investigate the return code further
 }
 temp = hih8120_getTemperature_x10();
+_delay_ms(200);
 xSemaphoreGive(xTestSemaphore);
     }
-}
+  
 uint16_t tempimpl_getMeasurement(){
 	uint16_t returntemp = 0;
     if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){

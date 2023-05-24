@@ -17,6 +17,8 @@
 #include <semphr.h>
 #include "src/handlers/co2Handler/interface/co2Handler.h"
 #include "src/handlers/temperturHandler/temperturHandler.h"
+#include "src/handlers/servoHandler/servoHandler.h"
+#include "./InterfaceWrapper/Wrapper.h"
 
 
 
@@ -131,6 +133,7 @@ void task2( void *pvParameters )
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 		puts("Task2"); // stdio functions are not reentrant - Should normally be protected by MUTEX
 		PORTA ^= _BV(PA7);
+		//servo_measuring();
 		
 /*		 
 if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){
@@ -185,9 +188,11 @@ void initialiseSystem()
 	
 	display_7seg_initialise(NULL); 
 
+wrapper_init();
 _delay_ms(1000);
 co2_init();
 temp_init();
+servo_handler_init();
 
 }
 
