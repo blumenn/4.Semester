@@ -1,6 +1,6 @@
 #include "servoHandler.h"
 #include "../InterfaceWrapper/Wrapper.h"
-#include "implementation/servo/servoImpl.h"
+#include "../implementation/servo/servoImpl.h"
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
 #include <queue.h>
@@ -91,22 +91,23 @@ void servo_measuring(){
         xSemaphoreGive(servoTestSemaphore);
         return ;
     }
-    if (configuration.minCo2Setting<co2)
+    if (configuration.minCo2Setting>co2)
     {
-        
+        servoCloseWindow();
         xSemaphoreGive(servoTestSemaphore);
 		return;
     }
-    if(configuration.minHumSetting< hum){
+    if(configuration.minHumSetting>hum){
+        servoCloseWindow();
         xSemaphoreGive(servoTestSemaphore);
 		return;
     }
-    if (configuration.minTempsetting< temp)
+    if (configuration.minTempsetting> temp)
     {
+        servoCloseWindow();
         xSemaphoreGive(servoTestSemaphore);
         return;
     }
-    servoCloseWindow();
     xSemaphoreGive(servoTestSemaphore);
         }
     return;
