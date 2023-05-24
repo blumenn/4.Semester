@@ -43,27 +43,6 @@ void create_temperaturehandler_task()
     );
 }
 
-TaskHandle_t temperatureHandlerTaskHandle = NULL;
-
-void temperature_handler_task(void *pvParameters)
-{
-    SensorData data;
-    data.sensorName = "Temperature";
-    
-    for(;;)
-    {
-        tempimpl_measure();
-        uint16_t tempValue = tempimpl_getMeasurement();
-
-        data.status = (tempValue != 0) ? SENSOR_STATUS_OK : SENSOR_STATUS_ERROR;
-        data.data = tempValue;
-
-       
-        xQueueSend(sensorQueue, &data, portMAX_DELAY);
-
-        vTaskDelay(pdMS_TO_TICKS(1000));  
-        }
-}
 
 
 void temp_init()
