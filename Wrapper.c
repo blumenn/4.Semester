@@ -14,7 +14,7 @@ static latestData lastData;
 static measuringSum tempSum;
 static measuringSum humSum;
 static measuringSum co2Sum;
-static SemaphoreHandle_t servoWrapperSemaphore 
+static SemaphoreHandle_t servoWrapperSemaphore=NULL;
 
 void wrapper_init(){
 	_uplink_payload.len = 6;
@@ -134,8 +134,9 @@ int16_t avg(measuringSum *data) {
 	data->antal=0;
 	data->sum = 0;
 	xSemaphoreGive(servoWrapperSemaphore);
-	}
 	return result;
+	}
+	return 0;
 }
 
 latestData get_latestData(){
