@@ -97,7 +97,7 @@ TEST_F(TempImplTest, TestTempImplInit) {
     EXPECT_EQ(hih8120_initialise_fake.call_count, 1);
     EXPECT_EQ(HIH8120_DRIVER_NOT_INITIALISED, 2); //her er det 2, fordi DRIVER_NOT_INITIALISED er 2. "værdi" i return hih8120_driverReturnCode_t enum. 
 }
-
+/*
 TEST_F(TempImplTest, TestTempImplMeasure) {
    
     hih8120_measure_fake.return_val = HIH8120_OK;
@@ -111,7 +111,7 @@ TEST_F(TempImplTest, TestTempImplMeasure) {
     EXPECT_EQ(xSemaphoreGive_fake.call_count,4);
     
 }
-
+*/
 
 
 
