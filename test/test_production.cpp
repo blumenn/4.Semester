@@ -7,7 +7,7 @@
 
 extern "C" 
 {
-#include "../src/implementation/co2Impl/mh_z19.h"
+#include "mh_z19.h"
 #include "../src/implementation/co2Impl/co2.h" 
 #include "../src/implementation/tempImpl/temperaturImpl.h"
 #include "../src/implementation/humidityImpl/humidityImpl.h"
