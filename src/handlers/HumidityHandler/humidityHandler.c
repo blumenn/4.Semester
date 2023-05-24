@@ -17,7 +17,6 @@ void humidity_handler_task(void *pvParameters)
 {
     SensorData data;
     
-    
     for(;;)
     {
         humimpl_measure();

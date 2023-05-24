@@ -1,14 +1,10 @@
 {
-    "cmake.sourceDirectory": "C:/Users/ander/Kodemaskinen/4. Semester/SEP4/4.Semester/test",
     "files.associations": {
         "atmega_freertos.h": "c",
-        "algorithm": "c",
-        "chrono": "c",
-        "limits": "c",
-        "servoimpl.h": "c",
-        "xutility": "c",
-        "array": "c",
-        "vector": "c",
-        "xstring": "c"
+
+        "temperaturimpl.h": "c",
+        "semphr.h": "c",
+        "hih8120.h": "c",
+        "serial.h": "c"
     }
 }
