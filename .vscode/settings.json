@@ -1,8 +1,7 @@
 {
-
- 
     "files.associations": {
         "atmega_freertos.h": "c",
+
         "temperaturimpl.h": "c",
         "semphr.h": "c",
         "hih8120.h": "c",

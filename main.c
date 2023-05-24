@@ -17,6 +17,7 @@
 #include <semphr.h>
 #include "src/handlers/co2Handler/interface/co2Handler.h"
 #include "src/handlers/temperturHandler/temperturHandler.h"
+#include "src/handlers/HumidityHandler/humidityHandler.h"
 #include "src/handlers/servoHandler/servoHandler.h"
 #include "./InterfaceWrapper/Wrapper.h"
 
@@ -56,7 +57,7 @@ void create_tasks_and_semaphores(void)
 			xSemaphoreGive( ( xTestSemaphore ) );  // Make the mutex available for use, by initially "Giving" the Semaphore.
 		}
 	}
-
+/*
 	xTaskCreate(
 	task1
 	,  "Task1"  // A name just for humans
@@ -71,7 +72,7 @@ void create_tasks_and_semaphores(void)
 	,  configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
 	,  NULL
 	,  1  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
-	,  NULL );
+	,  NULL );*/
 }
 
 /*-----------------------------------------------------------*/
@@ -189,9 +190,9 @@ void initialiseSystem()
 	display_7seg_initialise(NULL); 
 
 wrapper_init();
-_delay_ms(1000);
 co2_init();
 temp_init();
+humidity_Init();
 servo_handler_init();
 
 }
@@ -206,6 +207,7 @@ int main(void)
 	/* Replace with your application code */
 	while (1)
 	{
+		
 	}
 }
 
