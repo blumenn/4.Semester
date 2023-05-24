@@ -1,4 +1,5 @@
 #include <stdint.h>
+
 #include "ATMEGA_FreeRTOS.h"
 #include "task.h"
 #include "co2Handler.h"
@@ -6,6 +7,9 @@
 #include "../../implementation/co2Impl/co2.h"
 #include "mh_z19.h"
 #include "task.h"
+
+#include <queue.h>
+extern QueueHandle_t xQueue;
 
 
 void co2_handler_task(void *pvParameters);
@@ -23,6 +27,9 @@ void create_co2handler_task()
 	1,
 	&co2HandlerTaskHandle
 	);
+
+
+
 }
 
 void run_co2handler_task()
@@ -35,6 +42,7 @@ void run_co2handler_task()
 	xQueueSend(sensorQueue, &data, portMAX_DELAY);
 }
 
+
 void co2_handler_task(void *pvParameters)
 {
 	for(;;)
@@ -42,6 +50,7 @@ void co2_handler_task(void *pvParameters)
 		run_co2handler_task();
 		vTaskDelay(pdMS_TO_TICKS(10000));
 	}
+
 }
 
 void co2_init()

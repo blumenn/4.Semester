@@ -3,6 +3,10 @@
 #include "task.h"
 #include "../../src/implementation/tempImpl/temperaturImpl.h"
 #include "sensorData.h"
+#include "temperturHandler.h"
+#include <queue.h>
+
+extern QueueHandle_t xQueue;
 
 TaskHandle_t temperatureHandlerTaskHandle = NULL;
 
@@ -37,6 +41,7 @@ void create_temperaturehandler_task()
         1,
         &temperatureHandlerTaskHandle
     );
+
 
 }
 

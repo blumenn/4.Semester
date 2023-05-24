@@ -1,8 +1,11 @@
 #include <stdint.h>
-#include "FreeRTOS.h"
 #include "task.h"
 #include "humidityImpl.h"
 #include "sensorData.h"
+#include "humidityHandler.h"
+#include <ATMEGA_FreeRTOS.h>
+#include <queue.h>
+extern QueueHandle_t xQueue;
 
 TaskHandle_t humidityHandlerTaskHandle = NULL;
 
