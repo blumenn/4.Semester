@@ -38,6 +38,7 @@ temp = hih8120_getTemperature_x10();
 xSemaphoreGive(xTestSemaphore);
     }
 }
+
 uint16_t tempimpl_getMeasurement(){
 	uint16_t returntemp = 0;
     if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(200))==pdTRUE){

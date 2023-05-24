@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <hih8120.h>
-
+#include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
 #include "humidityImpl.h"
 #include "delay_hal.h"
