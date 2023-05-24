@@ -138,8 +138,6 @@ void lora_handler_task( void *pvParameters )
 
 	_lora_setup();
 
-	wrapper_init();
-
 	TickType_t xLastWakeTime;
 	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
 	xLastWakeTime = xTaskGetTickCount();
@@ -157,8 +155,8 @@ void lora_handler_task( void *pvParameters )
 		
 		_uplink_payload = wrapperhandler();
 		
-		if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE)
-		{
+		//if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE)
+		//{
 		// Some dummy payload
 		
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
@@ -197,8 +195,8 @@ void lora_handler_task( void *pvParameters )
     maxCo2Setting,
     minCo2Setting);
 		}
-				xSemaphoreGive(xTestSemaphore);
-		}
+		//		xSemaphoreGive(xTestSemaphore);
+		//}
 	
 		
 	}
