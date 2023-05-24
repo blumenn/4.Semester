@@ -5,7 +5,7 @@
         "type": "cppvsdbg",
         "request": "launch",
         "name": "Debug main",
-        "program": "${workspaceFolder}/build/Release/IoTTest.exe",
+        "program": "${workspaceFolder}/build/test/Release/IoTTest.exe",
         "args": [],
         "console": "integratedTerminal",
         "cwd": "${workspaceFolder}"
@@ -14,7 +14,7 @@
         "type": "cppvsdbg",
         "request": "launch",
         "name": "Run the motherf'ing gtest",
-        "program": "${workspaceFolder}/build/Release/IoTTest.exe",
+        "program": "${workspaceFolder}/build/test/Release/IoTTest.exe",
         "args": [],
         "console": "integratedTerminal",
         "cwd": "${workspaceFolder}"
