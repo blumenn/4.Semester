@@ -335,6 +335,12 @@
     <Compile Include="src\implementation\servo\servoImpl.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\implementation\tempImpl\delay_hal\delay_hal.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\implementation\tempImpl\delay_hal\delay_hal.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\implementation\tempImpl\temperaturImpl.c">
       <SubType>compile</SubType>
     </Compile>
@@ -374,6 +380,7 @@
     <Folder Include="src\implementation\servo\" />
     <Folder Include="src\implementation\servo\" />
     <Folder Include="src\implementation\tempImpl\" />
+    <Folder Include="src\implementation\tempImpl\delay_hal\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="drivers\.git">

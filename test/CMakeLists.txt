@@ -19,6 +19,7 @@ set(SOURCES_TEST
     ../src/implementation/co2Impl/co2impl.c
     ../src/implementation/tempImpl/temperaturImpl.c
    ../src/implementation/humidityImpl/humidityImpl.c
+   ../src/handlers/servohandler/servohandler.c
     test_production.cpp
     FreeRTOS_defs/FreeRTOS_FFF_MocksDefinitions.cpp
     ${SRCS})
@@ -31,8 +32,10 @@ include_directories(
     ../src/implementation/co2Impl
     ../src/implementation/tempImpl
     ../src/implementation/tempImpl/delay_hal
-
+    ../src/handlers/servohandler
     ../src/implementation/humidityImpl
+    ../src
+    ../interfaceWrapper
 
     )
 

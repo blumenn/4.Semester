@@ -1,5 +1,5 @@
 #include "temperaturImpl.h"
-#include "delay_hal.h"
+#include "delay_hal/delay_hal.h"
 #include <ATMEGA_FreeRTOS.h>
 #include <stdint.h>
 #include <hih8120.h>

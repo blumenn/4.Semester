@@ -38,6 +38,8 @@ src\implementation\humidityImpl\humidityImpl.c
 
 src\implementation\servo\servoImpl.c
 
+src\implementation\tempImpl\delay_hal\delay_hal.c
+
 src\implementation\tempImpl\temperaturImpl.c
 
 Wrapper.c
