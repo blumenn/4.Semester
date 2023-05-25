@@ -74,7 +74,7 @@ class TempImplTest : public testing::Test {
             xTestSemaphore = xSemaphoreCreateMutex();
             xSemaphoreGive(xTestSemaphore);
             RESET_FAKE(xSemaphoreTake);
-            RESET_FAKE(xSemaphoreGive)
+            RESET_FAKE(xSemaphoreGive);
         }
         void TearDown() override {
             vSemaphoreDelete(xTestSemaphore);
