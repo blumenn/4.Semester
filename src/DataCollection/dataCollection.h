@@ -1,8 +1,7 @@
+#pragma once
 #include <stdint.h>
 #include <lora_driver.h>
-
 #include "../src/SensorData.h"
-lora_driver_payload_t wrapperhandler();
 
 typedef struct
 {
@@ -17,5 +16,7 @@ typedef struct {
     uint8_t antal;
 } measuringSum;
 
+lora_driver_payload_t wrapperhandler();
+void dataCollection_init();
 latestData get_latestData();
 

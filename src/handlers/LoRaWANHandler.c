@@ -1,43 +1,23 @@
-/*
-* loraWANHandler.c
-*
-* Created: 12/04/2019 10:09:05
-*  Author: IHA
-*/
 #include <stddef.h>
 #include <stdio.h>
-#include "src/handlers/co2Handler/interface/co2Handler.h"
-#include "./InterfaceWrapper/Wrapper.h"
-#include "src/handlers/servoHandler/servoHandler.h"
-
-
+#include "../handlers/co2Handler/co2Handler.h"
+#include "../DataCollection/datacollection.h"
+#include "../handlers/servoHandler/servoHandler.h"
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
 #include <lora_driver.h>
 #include <status_leds.h>
-extern SemaphoreHandle_t xTestSemaphore;
-// Parameters for OTAA join - You have got these in a mail from IHA
+
+// Parameters for OTAA join 
 #define LORA_appEUI "7D8AC642ABB372BC"
 #define LORA_appKEY "458FC671144070F154BC8984B6051DA7"
 
 void lora_handler_task( void *pvParameters );
 
-
 static lora_driver_payload_t _uplink_payload;
-
-extern lora_driver_payload_t downlinkPayload;
-
+lora_driver_payload_t downlinkPayload;
 extern MessageBufferHandle_t downLinkMessageBufferHandle;
-
-uint16_t maxHumSetting; // Max Humidity
-uint16_t maxTempSetting; // Max Temperature
-uint16_t minHumSetting;
-
-uint16_t minTempsetting;
-
-uint16_t maxCo2Setting;
-
-uint16_t minCo2Setting;
+extern SemaphoreHandle_t xTestSemaphore;
 
 void lora_handler_initialise(UBaseType_t lora_handler_task_priority)
 {
@@ -49,7 +29,6 @@ void lora_handler_initialise(UBaseType_t lora_handler_task_priority)
 	,  lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	,  NULL );
 }
-
 
 static void _lora_setup(void)
 {
@@ -142,45 +121,31 @@ void lora_handler_task( void *pvParameters )
 	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
 	xLastWakeTime = xTaskGetTickCount();
 	
-//	MessageBufferHandle_t downLinkMessageBufferHandle = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2); // Here I make room for two downlink messages in the message buffer
-//	lora_driver_initialise(ser_USART1, downLinkMessageBufferHandle); // The parameter is the USART port the RN2483 module is connected to - in this case USART1 - here no message buffer for down-link messages are defined
-		
-	
 	for(;;)
 	{
-		display_7seg_powerUp();
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-		
+
 		_uplink_payload = wrapperhandler();
 	
-		status_leds_shortPuls(led_ST4);  // OPTIONAL
-		
+		status_leds_shortPuls(led_ST4); 
 		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
 
 		xMessageBufferReceive(downLinkMessageBufferHandle, &downlinkPayload, sizeof(lora_driver_payload_t), 10000);
 		
 		if(12 == downlinkPayload.len){
-			       maxHumSetting = (downlinkPayload.bytes[0] << 8) + downlinkPayload.bytes[1];
-			       
-			       minHumSetting = (downlinkPayload.bytes[2] << 8) + downlinkPayload.bytes[3];
-				   
-				   maxTempSetting = (downlinkPayload.bytes[4] << 8) + downlinkPayload.bytes[5];
-				   
-				   minTempsetting = (downlinkPayload.bytes[6] << 8) + downlinkPayload.bytes[7];
-				   
-				   maxCo2Setting = (downlinkPayload.bytes[8] << 8) + downlinkPayload.bytes[9];
-				   
-				   minCo2Setting = (downlinkPayload.bytes[10] << 8) + downlinkPayload.bytes[11];
-				  servo_set_config(maxHumSetting,
-    minHumSetting,
-    maxTempSetting,
-    minTempsetting,
-    maxCo2Setting,
-    minCo2Setting);
+			uint16_t maxHumSetting = (downlinkPayload.bytes[0] << 8) + downlinkPayload.bytes[1];
+			uint16_t minHumSetting = (downlinkPayload.bytes[2] << 8) + downlinkPayload.bytes[3]; 
+			uint16_t maxTempSetting = (downlinkPayload.bytes[4] << 8) + downlinkPayload.bytes[5]; 
+			uint16_t minTempsetting = (downlinkPayload.bytes[6] << 8) + downlinkPayload.bytes[7];
+			uint16_t maxCo2Setting = (downlinkPayload.bytes[8] << 8) + downlinkPayload.bytes[9]; 
+			uint16_t minCo2Setting = (downlinkPayload.bytes[10] << 8) + downlinkPayload.bytes[11];
+
+			servo_set_config(maxHumSetting,
+				minHumSetting,
+				maxTempSetting,
+				minTempsetting,
+				maxCo2Setting,
+				minCo2Setting);
 		}
-		//		xSemaphoreGive(xTestSemaphore);
-		//}
-	
-		
 	}
 }

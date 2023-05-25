@@ -28,6 +28,8 @@ src\handlers\co2Handler\co2Handler.c
 
 src\handlers\humidityHandler\humidityHandler.c
 
+src\handlers\LoRaWANHandler.c
+
 src\handlers\servoHandler\servoHandler.c
 
 src\handlers\temperturHandler\temperturHandler.c
@@ -42,9 +44,7 @@ src\implementation\tempImpl\delay_hal\delay_hal.c
 
 src\implementation\tempImpl\temperaturImpl.c
 
-Wrapper.c
-
-LoRaWANHandler.c
+src\DataCollection\Datacollection.c
 
 main.c
 
