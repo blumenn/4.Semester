@@ -149,4 +149,3 @@ TEST_F(HumImplTest, TestHumImplMeasure) {
     
     EXPECT_EQ(hih8120_measure_fake.call_count, 0);
 }  
-

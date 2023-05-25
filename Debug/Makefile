@@ -57,7 +57,8 @@ SUBDIRS :=  \
 ../src/implementation/humidityImpl/ \
 ../src/implementation/servo/ \
 ../src/implementation/servo/ \
-../src/implementation/tempImpl/
+../src/implementation/tempImpl/ \
+../src/implementation/tempImpl/delay_hal/
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
@@ -80,6 +81,7 @@ C_SRCS +=  \
 ../src/implementation/co2Impl/co2impl.c \
 ../src/implementation/humidityImpl/humidityImpl.c \
 ../src/implementation/servo/servoImpl.c \
+../src/implementation/tempImpl/delay_hal/delay_hal.c \
 ../src/implementation/tempImpl/temperaturImpl.c \
 ../Wrapper.c \
 ../LoRaWANHandler.c \
@@ -111,6 +113,7 @@ src/handlers/temperturHandler/temperturHandler.o \
 src/implementation/co2Impl/co2impl.o \
 src/implementation/humidityImpl/humidityImpl.o \
 src/implementation/servo/servoImpl.o \
+src/implementation/tempImpl/delay_hal/delay_hal.o \
 src/implementation/tempImpl/temperaturImpl.o \
 Wrapper.o \
 LoRaWANHandler.o \
@@ -135,6 +138,7 @@ src/handlers/temperturHandler/temperturHandler.o \
 src/implementation/co2Impl/co2impl.o \
 src/implementation/humidityImpl/humidityImpl.o \
 src/implementation/servo/servoImpl.o \
+src/implementation/tempImpl/delay_hal/delay_hal.o \
 src/implementation/tempImpl/temperaturImpl.o \
 Wrapper.o \
 LoRaWANHandler.o \
@@ -159,6 +163,7 @@ src/handlers/temperturHandler/temperturHandler.d \
 src/implementation/co2Impl/co2impl.d \
 src/implementation/humidityImpl/humidityImpl.d \
 src/implementation/servo/servoImpl.d \
+src/implementation/tempImpl/delay_hal/delay_hal.d \
 src/implementation/tempImpl/temperaturImpl.d \
 Wrapper.d \
 LoRaWANHandler.d \
@@ -183,6 +188,7 @@ src/handlers/temperturHandler/temperturHandler.d \
 src/implementation/co2Impl/co2impl.d \
 src/implementation/humidityImpl/humidityImpl.d \
 src/implementation/servo/servoImpl.d \
+src/implementation/tempImpl/delay_hal/delay_hal.d \
 src/implementation/tempImpl/temperaturImpl.d \
 Wrapper.d \
 LoRaWANHandler.d \
@@ -322,6 +328,13 @@ src/implementation/humidityImpl/humidityImpl.o: ../src/implementation/humidityIm
 	
 
 src/implementation/servo/servoImpl.o: ../src/implementation/servo/servoImpl.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../drivers" -I"../FreeRTOS/src" -I"../src"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/implementation/tempImpl/delay_hal/delay_hal.o: ../src/implementation/tempImpl/delay_hal/delay_hal.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../drivers" -I"../FreeRTOS/src" -I"../src"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

@@ -31,8 +31,9 @@ include_directories(
     ../src/implementation/co2Impl
     ../src/implementation/tempImpl
     ../src/implementation/tempImpl/delay_hal
-
     ../src/implementation/humidityImpl
+    ../src
+    ../interfaceWrapper
 
     )
 

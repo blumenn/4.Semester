@@ -149,32 +149,15 @@ void lora_handler_task( void *pvParameters )
 	for(;;)
 	{
 		display_7seg_powerUp();
-// 		maxHumSetting =1+maxHumSetting;
-// 		/display_7seg_display((float)maxHumSetting, 1);
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 		
 		_uplink_payload = wrapperhandler();
-		
-		//if(xSemaphoreTake(xTestSemaphore,pdMS_TO_TICKS(5000))==pdTRUE)
-		//{
-		// Some dummy payload
-		
+	
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		
 		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
 
-
-		// this code must be in the loop of a FreeRTOS task!
 		xMessageBufferReceive(downLinkMessageBufferHandle, &downlinkPayload, sizeof(lora_driver_payload_t), 10000);
-		//printf("DOWN LINK: from port: %d with %d bytes received!", downlinkPayload.portNo, downlinkPayload.len); // Just for Debug
-		if (2 == downlinkPayload.len) // Check that we have got the expected 4 bytes
-		{
-       // decode the payload into our variales
-       maxHumSetting = (downlinkPayload.bytes[0] << 8) + downlinkPayload.bytes[1];
-	   
-       maxTempSetting = (downlinkPayload.bytes[2] << 8) + downlinkPayload.bytes[3];
-	   
-		}
 		
 		if(12 == downlinkPayload.len){
 			       maxHumSetting = (downlinkPayload.bytes[0] << 8) + downlinkPayload.bytes[1];

@@ -3,7 +3,7 @@
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
 #include "humidityImpl.h"
-#include "delay_hal.h"
+#include "../tempImpl/delay_hal/delay_hal.h"
 
 static uint16_t hum;
 extern SemaphoreHandle_t xTestSemaphore;

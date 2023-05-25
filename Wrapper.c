@@ -1,9 +1,8 @@
-#include <stdint.h>
 #include "./src/handlers/co2Handler/interface/co2Handler.h"
 #include "./src/handlers/HumidityHandler/humidityHandler.h"
 #include "./src/handlers/temperturHandler/temperturHandler.h"
 #include "./InterfaceWrapper/Wrapper.h"
-#include <lora_driver.h>
+
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
 #include <status_leds.h>
