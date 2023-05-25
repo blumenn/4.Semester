@@ -290,19 +290,19 @@
     <Compile Include="FreeRTOS\src\variantHooks.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="InterfaceWrapper\Wrapper.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\handlers\co2Handler\co2Handler.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\handlers\co2Handler\interface\co2Handler.h">
+    <Compile Include="src\handlers\co2Handler\co2Handler.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\handlers\humidityHandler\humidityHandler.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\handlers\humidityHandler\humidityHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\handlers\LoRaWANHandler.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\handlers\servoHandler\servoHandler.c">
@@ -350,7 +350,10 @@
     <Compile Include="src\SensorData.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Wrapper.c">
+    <Compile Include="src\Wrapper\Wrapper.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Wrapper\Wrapper.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
@@ -361,18 +364,14 @@
     <Folder Include="FreeRTOS\Example\" />
     <Folder Include="FreeRTOS\FreeRTOSTraceDriver\" />
     <Folder Include="FreeRTOS\src\" />
-    <Folder Include="InterfaceWrapper\" />
     <Folder Include="src\" />
     <Folder Include="src\handlers\" />
     <Folder Include="src\handlers\co2Handler\" />
-    <Folder Include="src\handlers\co2Handler\interface\" />
     <Folder Include="src\handlers\humidityHandler\" />
-    <Folder Include="src\handlers\humidityHandler\interface\" />
     <Folder Include="src\handlers\servoHandler\" />
     <Folder Include="src\handlers\servoHandler\" />
     <Folder Include="src\handlers\temperturHandler\" />
     <Folder Include="src\handlers\temperturHandler\" />
-    <Folder Include="src\handlers\temperturHandler\interface\" />
     <Folder Include="src\handlers\temperturHandler\interface\" />
     <Folder Include="src\implementation\" />
     <Folder Include="src\implementation\co2Impl\" />
@@ -381,6 +380,7 @@
     <Folder Include="src\implementation\servo\" />
     <Folder Include="src\implementation\tempImpl\" />
     <Folder Include="src\implementation\tempImpl\delay_hal\" />
+    <Folder Include="src\Wrapper\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="drivers\.git">
@@ -428,9 +428,6 @@
     <None Include="FreeRTOS\src\LICENSE.md">
       <SubType>compile</SubType>
     </None>
-    <Compile Include="LoRaWANHandler.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>

@@ -19,7 +19,7 @@
 #include "src/handlers/temperturHandler/temperturHandler.h"
 #include "src/handlers/HumidityHandler/humidityHandler.h"
 #include "src/handlers/servoHandler/servoHandler.h"
-#include "./InterfaceWrapper/Wrapper.h"
+#include "src/Wrapper/Wrapper.h"
 
 
 

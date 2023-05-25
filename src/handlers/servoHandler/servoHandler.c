@@ -1,5 +1,5 @@
 #include "servoHandler.h"
-#include "../InterfaceWrapper/Wrapper.h"
+#include "../../Wrapper/Wrapper.h"
 #include "../../implementation/servo/servoImpl.h"
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>

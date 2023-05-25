@@ -1,7 +1,7 @@
-#include "./src/handlers/co2Handler/interface/co2Handler.h"
-#include "./src/handlers/HumidityHandler/humidityHandler.h"
-#include "./src/handlers/temperturHandler/temperturHandler.h"
-#include "./InterfaceWrapper/Wrapper.h"
+#include "../src/handlers/co2Handler/co2Handler.h"
+#include "../src/handlers/HumidityHandler/humidityHandler.h"
+#include "../src/handlers/temperturHandler/temperturHandler.h"
+#include "./Wrapper/Wrapper.h"
 
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>

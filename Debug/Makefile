@@ -39,18 +39,14 @@ SUBDIRS :=  \
 ../FreeRTOS/Example/ \
 ../FreeRTOS/FreeRTOSTraceDriver/ \
 ../FreeRTOS/src/ \
-../InterfaceWrapper/ \
 ../src/ \
 ../src/handlers/ \
 ../src/handlers/co2Handler/ \
-../src/handlers/co2Handler/interface/ \
 ../src/handlers/humidityHandler/ \
-../src/handlers/humidityHandler/interface/ \
 ../src/handlers/servoHandler/ \
 ../src/handlers/servoHandler/ \
 ../src/handlers/temperturHandler/ \
 ../src/handlers/temperturHandler/ \
-../src/handlers/temperturHandler/interface/ \
 ../src/handlers/temperturHandler/interface/ \
 ../src/implementation/ \
 ../src/implementation/co2Impl/ \
@@ -58,7 +54,8 @@ SUBDIRS :=  \
 ../src/implementation/servo/ \
 ../src/implementation/servo/ \
 ../src/implementation/tempImpl/ \
-../src/implementation/tempImpl/delay_hal/
+../src/implementation/tempImpl/delay_hal/ \
+../src/Wrapper/
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
@@ -76,6 +73,7 @@ C_SRCS +=  \
 ../FreeRTOS/src/variantHooks.c \
 ../src/handlers/co2Handler/co2Handler.c \
 ../src/handlers/humidityHandler/humidityHandler.c \
+../src/handlers/LoRaWANHandler.c \
 ../src/handlers/servoHandler/servoHandler.c \
 ../src/handlers/temperturHandler/temperturHandler.c \
 ../src/implementation/co2Impl/co2impl.c \
@@ -83,8 +81,7 @@ C_SRCS +=  \
 ../src/implementation/servo/servoImpl.c \
 ../src/implementation/tempImpl/delay_hal/delay_hal.c \
 ../src/implementation/tempImpl/temperaturImpl.c \
-../Wrapper.c \
-../LoRaWANHandler.c \
+../src/Wrapper/Wrapper.c \
 ../main.c
 
 
@@ -108,6 +105,7 @@ FreeRTOS/src/timers.o \
 FreeRTOS/src/variantHooks.o \
 src/handlers/co2Handler/co2Handler.o \
 src/handlers/humidityHandler/humidityHandler.o \
+src/handlers/LoRaWANHandler.o \
 src/handlers/servoHandler/servoHandler.o \
 src/handlers/temperturHandler/temperturHandler.o \
 src/implementation/co2Impl/co2impl.o \
@@ -115,8 +113,7 @@ src/implementation/humidityImpl/humidityImpl.o \
 src/implementation/servo/servoImpl.o \
 src/implementation/tempImpl/delay_hal/delay_hal.o \
 src/implementation/tempImpl/temperaturImpl.o \
-Wrapper.o \
-LoRaWANHandler.o \
+src/Wrapper/Wrapper.o \
 main.o
 
 OBJS_AS_ARGS +=  \
@@ -133,6 +130,7 @@ FreeRTOS/src/timers.o \
 FreeRTOS/src/variantHooks.o \
 src/handlers/co2Handler/co2Handler.o \
 src/handlers/humidityHandler/humidityHandler.o \
+src/handlers/LoRaWANHandler.o \
 src/handlers/servoHandler/servoHandler.o \
 src/handlers/temperturHandler/temperturHandler.o \
 src/implementation/co2Impl/co2impl.o \
@@ -140,8 +138,7 @@ src/implementation/humidityImpl/humidityImpl.o \
 src/implementation/servo/servoImpl.o \
 src/implementation/tempImpl/delay_hal/delay_hal.o \
 src/implementation/tempImpl/temperaturImpl.o \
-Wrapper.o \
-LoRaWANHandler.o \
+src/Wrapper/Wrapper.o \
 main.o
 
 C_DEPS +=  \
@@ -158,6 +155,7 @@ FreeRTOS/src/timers.d \
 FreeRTOS/src/variantHooks.d \
 src/handlers/co2Handler/co2Handler.d \
 src/handlers/humidityHandler/humidityHandler.d \
+src/handlers/LoRaWANHandler.d \
 src/handlers/servoHandler/servoHandler.d \
 src/handlers/temperturHandler/temperturHandler.d \
 src/implementation/co2Impl/co2impl.d \
@@ -165,8 +163,7 @@ src/implementation/humidityImpl/humidityImpl.d \
 src/implementation/servo/servoImpl.d \
 src/implementation/tempImpl/delay_hal/delay_hal.d \
 src/implementation/tempImpl/temperaturImpl.d \
-Wrapper.d \
-LoRaWANHandler.d \
+src/Wrapper/Wrapper.d \
 main.d
 
 C_DEPS_AS_ARGS +=  \
@@ -183,6 +180,7 @@ FreeRTOS/src/timers.d \
 FreeRTOS/src/variantHooks.d \
 src/handlers/co2Handler/co2Handler.d \
 src/handlers/humidityHandler/humidityHandler.d \
+src/handlers/LoRaWANHandler.d \
 src/handlers/servoHandler/servoHandler.d \
 src/handlers/temperturHandler/temperturHandler.d \
 src/implementation/co2Impl/co2impl.d \
@@ -190,8 +188,7 @@ src/implementation/humidityImpl/humidityImpl.d \
 src/implementation/servo/servoImpl.d \
 src/implementation/tempImpl/delay_hal/delay_hal.d \
 src/implementation/tempImpl/temperaturImpl.d \
-Wrapper.d \
-LoRaWANHandler.d \
+src/Wrapper/Wrapper.d \
 main.d
 
 OUTPUT_FILE_PATH +=4.Semester.elf
@@ -299,6 +296,13 @@ src/handlers/humidityHandler/humidityHandler.o: ../src/handlers/humidityHandler/
 	@echo Finished building: $<
 	
 
+src/handlers/LoRaWANHandler.o: ../src/handlers/LoRaWANHandler.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../drivers" -I"../FreeRTOS/src" -I"../src"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 src/handlers/servoHandler/servoHandler.o: ../src/handlers/servoHandler/servoHandler.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -348,14 +352,7 @@ src/implementation/tempImpl/temperaturImpl.o: ../src/implementation/tempImpl/tem
 	@echo Finished building: $<
 	
 
-./Wrapper.o: .././Wrapper.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../drivers" -I"../FreeRTOS/src" -I"../src"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./LoRaWANHandler.o: .././LoRaWANHandler.c
+src/Wrapper/Wrapper.o: ../src/Wrapper/Wrapper.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../drivers" -I"../FreeRTOS/src" -I"../src"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

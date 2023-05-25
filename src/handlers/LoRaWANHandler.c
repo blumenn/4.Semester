@@ -6,9 +6,9 @@
 */
 #include <stddef.h>
 #include <stdio.h>
-#include "src/handlers/co2Handler/interface/co2Handler.h"
-#include "./InterfaceWrapper/Wrapper.h"
-#include "src/handlers/servoHandler/servoHandler.h"
+#include "../handlers/co2Handler/co2Handler.h"
+#include "../Wrapper/Wrapper.h"
+#include "../handlers/servoHandler/servoHandler.h"
 
 
 #include <ATMEGA_FreeRTOS.h>
