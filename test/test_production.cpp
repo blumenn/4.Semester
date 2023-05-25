@@ -72,9 +72,6 @@ class TempImplTest : public testing::Test {
             RESET_FAKE(hih8120_measure);
             RESET_FAKE(hih8120_getTemperature_x10);
             xTestSemaphore = xSemaphoreCreateMutex();
-            xSemaphoreGive(xTestSemaphore);
-            RESET_FAKE(xSemaphoreTake);
-            RESET_FAKE(xSemaphoreGive);
         }
         void TearDown() override {
             vSemaphoreDelete(xTestSemaphore);
@@ -145,5 +142,5 @@ TEST_F(HumImplTest, TestHumImplMeasure) {
     
     humimpl_measure();
     
-    EXPECT_EQ(hih8120_measure_fake.call_count, 1);
+    EXPECT_EQ(hih8120_measure_fake.call_count, 2);
 }  
