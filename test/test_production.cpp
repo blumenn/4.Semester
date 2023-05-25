@@ -13,9 +13,6 @@ extern "C"
 #include "../src/implementation/humidityImpl/humidityImpl.h"
 #include "../src/implementation/tempImpl/delay_hal/delay_hal.h"
 #include "hih8120.h"
-#include "../src/handlers/servoHandler/servoHandler.h"
-#include "../src/SensorData.h"
-#include "../InterfaceWrapper/Wrapper.h"
 SemaphoreHandle_t xTestSemaphore;
 }
 
@@ -162,24 +159,3 @@ TEST_F(HumImplTest, TestHumImplMeasure) {
 }  
 
 */
-
-FAKE_VALUE_FUNC(latestData,get_latestData);
-
-class servoHandlerTest : public testing::Test {
-protected:
-    void SetUp() override {
-        servo_handler_init();
-    }
-    void TearDown() override {
-        
-
-	}
-};
-
-TEST_F(servoHandlerTest, Testopen){
-    latestData fakeStrukt;
-    fakeStrukt.
-    
-    get_latestData_Fake.retun_val = fakeStrukt;
-}
-
