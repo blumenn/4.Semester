@@ -1,6 +1,6 @@
 #include "servoHandler.h"
 #include "../InterfaceWrapper/Wrapper.h"
-#include "../implementation/servo/servoImpl.h"
+#include "../../implementation/servo/servoImpl.h"
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
 #include <queue.h>
