@@ -10,8 +10,6 @@ typedef struct config
     uint16_t minCo2Setting;
 } config;
 
-
-
 void servo_handler_init(void);
 void servo_set_config(uint16_t maxHumSetting,
     uint16_t minHumSetting,

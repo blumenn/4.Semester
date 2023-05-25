@@ -7,7 +7,6 @@
 #include <queue.h>
 
 extern QueueHandle_t xQueue;
-TaskHandle_t humidityHandlerTaskHandle = NULL;
 
 void humidity_Init(){
 	create_humidityhandler_task();
@@ -16,16 +15,15 @@ void humidity_Init(){
 void humidity_handler_task(void *pvParameters)
 {
     SensorData data;
-    
+    data.sensorName = hum;
     for(;;)
     {
         humimpl_measure();
         uint16_t humValue = humimpl_getMeasurement();
-		data.sensorName = hum;
         data.status = (humValue != 0) ? SENSOR_STATUS_OK : SENSOR_STATUS_ERROR; 
         data.data = humValue;
 
-        xQueueSend(xQueue, &data, 10);
+        xQueueSend(xQueue, &data, 100);
 
         vTaskDelay(pdMS_TO_TICKS(5000));  
     }
@@ -40,15 +38,11 @@ void create_humidityhandler_task()
         configMINIMAL_STACK_SIZE+100,
         NULL,
         0,
-        &humidityHandlerTaskHandle
+        NULL
     );
-
-
 }
-
 
 uint16_t hum_getMeasurement(){
 	humimpl_measure();
-    
     return humimpl_getMeasurement();
 }

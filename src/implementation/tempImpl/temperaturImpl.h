@@ -1,5 +1,6 @@
-#include <stdint.h>
+#pragma once
 
+#include <stdint.h>
 
 void tempimpl_init();
 void tempimpl_measure();

@@ -55,7 +55,7 @@ SUBDIRS :=  \
 ../src/implementation/servo/ \
 ../src/implementation/tempImpl/ \
 ../src/implementation/tempImpl/delay_hal/ \
-../src/Wrapper/
+../src/DataCollection
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
@@ -81,7 +81,7 @@ C_SRCS +=  \
 ../src/implementation/servo/servoImpl.c \
 ../src/implementation/tempImpl/delay_hal/delay_hal.c \
 ../src/implementation/tempImpl/temperaturImpl.c \
-../src/Wrapper/Wrapper.c \
+../src/DataCollection/Datacollection.c \
 ../main.c
 
 
@@ -113,7 +113,7 @@ src/implementation/humidityImpl/humidityImpl.o \
 src/implementation/servo/servoImpl.o \
 src/implementation/tempImpl/delay_hal/delay_hal.o \
 src/implementation/tempImpl/temperaturImpl.o \
-src/Wrapper/Wrapper.o \
+src/DataCollection/Datacollection.o \
 main.o
 
 OBJS_AS_ARGS +=  \
@@ -138,7 +138,7 @@ src/implementation/humidityImpl/humidityImpl.o \
 src/implementation/servo/servoImpl.o \
 src/implementation/tempImpl/delay_hal/delay_hal.o \
 src/implementation/tempImpl/temperaturImpl.o \
-src/Wrapper/Wrapper.o \
+src/DataCollection/Datacollection.o \
 main.o
 
 C_DEPS +=  \
@@ -163,7 +163,7 @@ src/implementation/humidityImpl/humidityImpl.d \
 src/implementation/servo/servoImpl.d \
 src/implementation/tempImpl/delay_hal/delay_hal.d \
 src/implementation/tempImpl/temperaturImpl.d \
-src/Wrapper/Wrapper.d \
+src/DataCollection/Datacollection.d \
 main.d
 
 C_DEPS_AS_ARGS +=  \
@@ -188,7 +188,7 @@ src/implementation/humidityImpl/humidityImpl.d \
 src/implementation/servo/servoImpl.d \
 src/implementation/tempImpl/delay_hal/delay_hal.d \
 src/implementation/tempImpl/temperaturImpl.d \
-src/Wrapper/Wrapper.d \
+src/DataCollection/Datacollection.d \
 main.d
 
 OUTPUT_FILE_PATH +=4.Semester.elf
@@ -352,7 +352,7 @@ src/implementation/tempImpl/temperaturImpl.o: ../src/implementation/tempImpl/tem
 	@echo Finished building: $<
 	
 
-src/Wrapper/Wrapper.o: ../src/Wrapper/Wrapper.c
+src/DataCollection/Datacollection.o: ../src/DataCollection/Datacollection.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../drivers" -I"../FreeRTOS/src" -I"../src"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

@@ -350,10 +350,10 @@
     <Compile Include="src\SensorData.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Wrapper\Wrapper.c">
+    <Compile Include="src\DataCollection\Datacollection.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Wrapper\Wrapper.h">
+    <Compile Include="src\DataCollection\Datacollection.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
@@ -380,7 +380,7 @@
     <Folder Include="src\implementation\servo\" />
     <Folder Include="src\implementation\tempImpl\" />
     <Folder Include="src\implementation\tempImpl\delay_hal\" />
-    <Folder Include="src\Wrapper\" />
+    <Folder Include="src\DataCollection" />
   </ItemGroup>
   <ItemGroup>
     <None Include="drivers\.git">

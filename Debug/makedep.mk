@@ -44,7 +44,7 @@ src\implementation\tempImpl\delay_hal\delay_hal.c
 
 src\implementation\tempImpl\temperaturImpl.c
 
-src\Wrapper\Wrapper.c
+src\DataCollection\Datacollection.c
 
 main.c
 
