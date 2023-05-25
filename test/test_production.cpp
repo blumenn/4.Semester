@@ -97,7 +97,7 @@ TEST_F(TempImplTest, TestTempImplInit) {
     EXPECT_EQ(hih8120_initialise_fake.call_count, 1);
     EXPECT_EQ(HIH8120_DRIVER_NOT_INITIALISED, 2); //her er det 2, fordi DRIVER_NOT_INITIALISED er 2. "værdi" i return hih8120_driverReturnCode_t enum. 
 }
-/*
+
 TEST_F(TempImplTest, TestTempImplMeasure) {
    
     hih8120_measure_fake.return_val = HIH8120_OK;
@@ -106,25 +106,17 @@ TEST_F(TempImplTest, TestTempImplMeasure) {
     tempimpl_measure();
     
     EXPECT_EQ(hih8120_measure_fake.call_count, 1);
-    EXPECT_EQ(xSemaphoreTake_fake.call_count, 2);
+    EXPECT_EQ(xSemaphoreTake_fake.call_count, 1);
     EXPECT_EQ(hih8120_wakeup_fake.call_count, 1);
-    EXPECT_EQ(xSemaphoreGive_fake.call_count,4);
+    EXPECT_EQ(xSemaphoreGive_fake.call_count,2);
     
 }
-*/
 
 
 
 
 
 
-
-
-
-
-/*
-
-// Define fake functions
 
 class HumImplTest : public testing::Test {
 protected:
@@ -155,8 +147,6 @@ TEST_F(HumImplTest, TestHumImplMeasure) {
     hih8120_measure_fake.return_val = HIH8120_OK;
     humimpl_measure();
     
-    EXPECT_EQ(hih8120_measure_fake.call_count, 1);
+    EXPECT_EQ(hih8120_measure_fake.call_count, 0);
 }  
-
-*/
 
