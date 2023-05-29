@@ -1,10 +1,8 @@
-#include <stddef.h>
 #include "co2.h"
-#include "mh_z19.h"
-#include "serial.h"
+#include <stddef.h>
 #include <stdio.h>
-uint16_t ppm;
 
+uint16_t ppm;
 
 void co2CallBack(uint16_t ppmCall)
 {
@@ -16,8 +14,7 @@ void co2impl_init(){
 	mh_z19_injectCallBack(co2CallBack);
 }
 
-
-void co2impl_measure()
+mh_z19_returnCode_t co2impl_measure()
 {
 	mh_z19_returnCode_t returnCode = mh_z19_takeMeassuring();
 	
@@ -25,8 +22,8 @@ void co2impl_measure()
 	{
 		printf("CO2HardwareERROR: %d\n", returnCode);
 	}
+	return returnCode;
 }
-
 
 uint16_t co2impl_getMeasurement()
 {

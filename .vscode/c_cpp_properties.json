@@ -6,11 +6,14 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/src/handlers/co2Handler/interface",
                 "${workspaceFolder}/src/implementation",
+                "${workspaceFolder}/src/handlers/temperturHandler/",
                 "${workspaceFolder}/src/handlers/temperturHandler/interface",
+                "${workspaceFolder}/src/handlers/servoHandler",
                 "${workspaceFolder}/src/implementation/co2Impl",
                 "${workspaceFolder}/drivers",
                 "${workspaceFolder}/build/_deps/googletest-src/googletest/include",
-                "${workspaceFolder}/FreeRTOS/src"
+                "${workspaceFolder}/FreeRTOS/src",
+                "${workspaceFolder}/src/implementation/tempImpl/delay_hal"
             ],
             "defines": [
                 "_DEBUG",

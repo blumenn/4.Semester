@@ -99,53 +99,53 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrGcc>
-  <avrgcc.common.Device>-mmcu=atmega2560 -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560"</avrgcc.common.Device>
-  <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
-  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
-  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
-  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
-  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
-  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
-  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
-  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
-  <avrgcc.compiler.symbols.DefSymbols>
-    <ListValues>
-      <Value>DEBUG</Value>
-      <Value>F_CPU=16000000L</Value>
-    </ListValues>
-  </avrgcc.compiler.symbols.DefSymbols>
-  <avrgcc.compiler.directories.IncludePaths>
-    <ListValues>
-      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
-      <Value>../drivers</Value>
-      <Value>../FreeRTOS/src</Value>
-      <Value>../src</Value>
-    </ListValues>
-  </avrgcc.compiler.directories.IncludePaths>
-  <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
-  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
-  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
-  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
-  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
-  <avrgcc.linker.libraries.Libraries>
-    <ListValues>
-      <Value>libm</Value>
-      <Value>libIotLibrary</Value>
-    </ListValues>
-  </avrgcc.linker.libraries.Libraries>
-  <avrgcc.linker.libraries.LibrarySearchPaths>
-    <ListValues>
-      <Value>../drivers</Value>
-      <Value>../src</Value>
-    </ListValues>
-  </avrgcc.linker.libraries.LibrarySearchPaths>
-  <avrgcc.assembler.general.IncludePaths>
-    <ListValues>
-      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
-    </ListValues>
-  </avrgcc.assembler.general.IncludePaths>
-  <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
-</AvrGcc>
+        <avrgcc.common.Device>-mmcu=atmega2560 -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega2560"</avrgcc.common.Device>
+        <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
+        <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+        <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+        <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+        <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+        <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+        <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+        <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+        <avrgcc.compiler.symbols.DefSymbols>
+          <ListValues>
+            <Value>DEBUG</Value>
+            <Value>F_CPU=16000000L</Value>
+          </ListValues>
+        </avrgcc.compiler.symbols.DefSymbols>
+        <avrgcc.compiler.directories.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
+            <Value>../drivers</Value>
+            <Value>../FreeRTOS/src</Value>
+            <Value>../src</Value>
+          </ListValues>
+        </avrgcc.compiler.directories.IncludePaths>
+        <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
+        <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+        <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+        <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+        <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+        <avrgcc.linker.libraries.Libraries>
+          <ListValues>
+            <Value>libm</Value>
+            <Value>libIotLibrary</Value>
+          </ListValues>
+        </avrgcc.linker.libraries.Libraries>
+        <avrgcc.linker.libraries.LibrarySearchPaths>
+          <ListValues>
+            <Value>../drivers</Value>
+            <Value>../src</Value>
+          </ListValues>
+        </avrgcc.linker.libraries.LibrarySearchPaths>
+        <avrgcc.assembler.general.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
+          </ListValues>
+        </avrgcc.assembler.general.IncludePaths>
+        <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
+      </AvrGcc>
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
@@ -290,19 +290,25 @@
     <Compile Include="FreeRTOS\src\variantHooks.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="InterfaceWrapper\Wrapper.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\handlers\co2Handler\co2Handler.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\handlers\co2Handler\interface\co2Handler.h">
+    <Compile Include="src\handlers\co2Handler\co2Handler.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\handlers\humidityHandler\humidityHandler.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\handlers\humidityHandler\humidityHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\handlers\LoRaWANHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\handlers\servoHandler\servoHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\handlers\servoHandler\servoHandler.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\handlers\temperturHandler\temperturHandler.c">
@@ -323,13 +329,31 @@
     <Compile Include="src\implementation\humidityImpl\humidityImpl.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\implementation\servo\servoImpl.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\implementation\servo\servoImpl.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\implementation\tempImpl\delay_hal\delay_hal.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\implementation\tempImpl\delay_hal\delay_hal.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\implementation\tempImpl\temperaturImpl.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\implementation\tempImpl\temperaturimpl.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Wrapper.c">
+    <Compile Include="src\SensorData.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\DataCollection\Datacollection.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\DataCollection\Datacollection.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
@@ -340,21 +364,23 @@
     <Folder Include="FreeRTOS\Example\" />
     <Folder Include="FreeRTOS\FreeRTOSTraceDriver\" />
     <Folder Include="FreeRTOS\src\" />
-    <Folder Include="InterfaceWrapper\" />
     <Folder Include="src\" />
     <Folder Include="src\handlers\" />
     <Folder Include="src\handlers\co2Handler\" />
-    <Folder Include="src\handlers\co2Handler\interface\" />
     <Folder Include="src\handlers\humidityHandler\" />
-    <Folder Include="src\handlers\humidityHandler\interface\" />
+    <Folder Include="src\handlers\servoHandler\" />
+    <Folder Include="src\handlers\servoHandler\" />
     <Folder Include="src\handlers\temperturHandler\" />
     <Folder Include="src\handlers\temperturHandler\" />
-    <Folder Include="src\handlers\temperturHandler\interface\" />
     <Folder Include="src\handlers\temperturHandler\interface\" />
     <Folder Include="src\implementation\" />
     <Folder Include="src\implementation\co2Impl\" />
     <Folder Include="src\implementation\humidityImpl\" />
+    <Folder Include="src\implementation\servo\" />
+    <Folder Include="src\implementation\servo\" />
     <Folder Include="src\implementation\tempImpl\" />
+    <Folder Include="src\implementation\tempImpl\delay_hal\" />
+    <Folder Include="src\DataCollection" />
   </ItemGroup>
   <ItemGroup>
     <None Include="drivers\.git">
@@ -402,9 +428,6 @@
     <None Include="FreeRTOS\src\LICENSE.md">
       <SubType>compile</SubType>
     </None>
-    <Compile Include="LoRaWANHandler.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
