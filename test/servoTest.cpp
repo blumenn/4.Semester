@@ -7,6 +7,7 @@
     #include "../src/DataCollection/dataCollection.h"
     #include "../../implementation/servo/servoImpl.h"
     #include "servoHandler.h"
+    #include "lora_driver.h"
     #include "rc_servo.h"
     }
 
