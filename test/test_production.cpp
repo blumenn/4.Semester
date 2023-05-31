@@ -16,7 +16,6 @@ QueueHandle_t xQueue;
 SemaphoreHandle_t xTestSemaphore;
 }
 
-// Define fake functions
 FAKE_VOID_FUNC(mh_z19_initialise, serial_comPort_t);
 typedef void (*mh_z19_callback)(uint16_t);
 FAKE_VOID_FUNC(mh_z19_injectCallBack, mh_z19_callback);
@@ -46,7 +45,7 @@ TEST_F(Co2ImplTest, TestGetMeasurement) {
 	
     EXPECT_EQ(0, co2ppm);
 }
- /*
+ 
 TEST_F(Co2ImplTest, TestCo2ImplInit) {
     co2impl_init();
     
@@ -60,7 +59,7 @@ TEST_F(Co2ImplTest, TestCo2ImplMeasure) {
     
     EXPECT_EQ(mh_z19_takeMeassuring_fake.call_count, 1);
 }
-*/
+
 
 FAKE_VALUE_FUNC(hih8120_driverReturnCode_t, hih8120_initialise);
 FAKE_VOID_FUNC(delay_hal, uint16_t);
@@ -126,10 +125,8 @@ class HumImplTest : public testing::Test {
         }
         void TearDown() override {
             vSemaphoreDelete(xTestSemaphore);
-
         }
 };
-
 
 TEST_F (HumImplTest, TestGetMeasurement) {
 	hih8120_getHumidityPercent_x10_fake.return_val = 0;
@@ -140,7 +137,6 @@ TEST_F (HumImplTest, TestGetMeasurement) {
 
     EXPECT_EQ(0, hum);
 }
-
 
 FAKE_VOID_FUNC(co2_init);
 FAKE_VALUE_FUNC(mh_z19_returnCode_t, co2_measure);
