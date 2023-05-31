@@ -1,6 +1,6 @@
 #pragma once
 #include <stdint.h>
-#include <lora_driver.h>
+#include "lora_driver.h"
 #include "../src/SensorData.h"
 
 typedef struct
