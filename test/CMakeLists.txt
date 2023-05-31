@@ -18,9 +18,12 @@ message("Current source dir: ${CMAKE_CURRENT_SOURCE_DIR}")
 set(SOURCES_TEST
     ../src/implementation/co2Impl/co2impl.c
     ../src/implementation/tempImpl/temperaturImpl.c
-   ../src/implementation/humidityImpl/humidityImpl.c
+    ../src/implementation/humidityImpl/humidityImpl.c
+    ../src/handlers/servoHandler/servoHandler.c
     test_production.cpp
+    servoTest.cpp
     FreeRTOS_defs/FreeRTOS_FFF_MocksDefinitions.cpp
+    ../src/handlers/co2Handler/co2Handler.c
     ${SRCS})
 
 # This makes the test.cpp files able to #include target libraries without errors. 
@@ -34,7 +37,11 @@ include_directories(
     ../src/implementation/humidityImpl
     ../src
     ../interfaceWrapper
-
+    ../src/handlers/servoHandler
+    ../src/handlers/co2Handler
+    
+  
+    ../src/DataCollection
     )
 
 # Something to 
