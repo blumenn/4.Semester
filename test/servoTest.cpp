@@ -4,7 +4,7 @@
     #include "FreeRTOS_FFF_MocksDeclaration.h"
 
     extern "C" {
-    #include "../src/DataCollection/datacollection.h"
+    #include "../src/DataCollection/dataCollection.h"
     #include "../../implementation/servo/servoImpl.h"
     #include "servoHandler.h"
     #include "rc_servo.h"
