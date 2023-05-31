@@ -12,6 +12,7 @@ extern "C"
 #include "../src/implementation/tempImpl/delay_hal/delay_hal.h"
 #include "hih8120.h"
 #include "../src/SensorData.h"
+#include "lora_driver.h"
 QueueHandle_t xQueue;
 SemaphoreHandle_t xTestSemaphore;
 }

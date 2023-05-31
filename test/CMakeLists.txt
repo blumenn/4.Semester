@@ -20,10 +20,10 @@ set(SOURCES_TEST
     ../src/implementation/tempImpl/temperaturImpl.c
     ../src/implementation/humidityImpl/humidityImpl.c
     ../src/handlers/servoHandler/servoHandler.c
+    ../src/handlers/co2Handler/co2Handler.c
     test_production.cpp
     servoTest.cpp
     FreeRTOS_defs/FreeRTOS_FFF_MocksDefinitions.cpp
-    ../src/handlers/co2Handler/co2Handler.c
     ${SRCS})
 
 # This makes the test.cpp files able to #include target libraries without errors. 

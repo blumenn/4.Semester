@@ -5,6 +5,7 @@
         "semphr.h": "c",
         "hih8120.h": "c",
         "serial.h": "c",
-        "task.h": "c"
+        "task.h": "c",
+        "sensordata.h": "c"
     }
 }
