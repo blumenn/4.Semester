@@ -1,5 +1,5 @@
 #include "servoHandler.h"
-#include "../../DataCollection/datacollection.h"
+#include "../../DataCollection/dataCollection.h"
 #include "../../implementation/servo/servoImpl.h"
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
