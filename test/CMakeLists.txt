@@ -18,8 +18,11 @@ message("Current source dir: ${CMAKE_CURRENT_SOURCE_DIR}")
 set(SOURCES_TEST
     ../src/implementation/co2Impl/co2impl.c
     ../src/implementation/tempImpl/temperaturImpl.c
-   ../src/implementation/humidityImpl/humidityImpl.c
+    ../src/implementation/humidityImpl/humidityImpl.c
+   # ../src/handlers/servoHandler/servoHandler.c
+    ../src/handlers/co2Handler/co2Handler.c
     test_production.cpp
+    servoTest.cpp
     FreeRTOS_defs/FreeRTOS_FFF_MocksDefinitions.cpp
     ${SRCS})
 
@@ -34,7 +37,11 @@ include_directories(
     ../src/implementation/humidityImpl
     ../src
     ../interfaceWrapper
-
+    #../src/handlers/servoHandler
+    ../src/handlers/co2Handler
+    
+  
+    ../src/DataCollection
     )
 
 # Something to 
